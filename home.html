@@ -1,384 +1,216 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SW Consultant — Telegram Bot</title>
-
-  <!-- Google font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <!-- tsparticles CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.0/tsparticles.bundle.min.js"></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SW Consultant</title>
   <style>
-    :root{
-      --bg-1: #060717;
-      --bg-2: #071228;
-      --accent-1: #5B3FFF; /* purple */
-      --accent-2: #4BC9FF; /* sky */
-      --muted: #9aa4bf;
-      --glass: rgba(255,255,255,0.06);
-      --glass-2: rgba(255,255,255,0.035);
-      --card-grad-from: rgba(255,255,255,0.03);
-      --card-grad-to: rgba(255,255,255,0.02);
-      --radius: 14px;
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, #4b6cb7, #182848);
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    * { box-sizing: border-box; }
-    html,body{ height:100%; margin:0; font-family:'Poppins',system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial; background: linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:#eaf0ff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-
-    /* layout */
-    .wrap{ min-height:100vh; position:relative; overflow:hidden; }
-    header{ position:relative; z-index:20; max-width:1200px; margin:28px auto 0; padding:0 20px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
-    .brand{ display:flex; align-items:center; gap:12px; }
-    .logo{
-      width:56px; height:56px; border-radius:12px;
-      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
-      display:flex; align-items:center; justify-content:center; font-weight:700; color:white; box-shadow: 0 8px 30px rgba(91,63,255,0.16);
+    header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 60px;
+      position:fixed;
+      width:100%;
+      background:rgba(20,20,40,0.4);
+      backdrop-filter: blur(10px);
+      z-index:10;
+      border-bottom:1px solid rgba(255,255,255,0.1);
     }
-    nav { display:flex; gap:10px; align-items:center; }
-    .nav-btn{ background:var(--glass); border:1px solid rgba(255,255,255,0.06); padding:10px 14px; border-radius:10px; font-weight:600; color: #edf2ff; cursor:pointer; transition:transform .18s ease, box-shadow .18s ease; backdrop-filter: blur(6px); }
-    .nav-btn:hover{ transform:translateY(-4px); box-shadow: 0 10px 30px rgba(11,18,40,0.45); }
-    .cta{ background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); padding:10px 14px; border-radius:10px; font-weight:700; box-shadow: 0 10px 30px rgba(75,201,255,0.12); color:white; border:none; cursor:pointer; }
 
-    /* mobile select */
-    .mobile-select{ display:none; background:var(--glass); border:1px solid rgba(255,255,255,0.04); color:#eaf0ff; padding:10px; border-radius:8px; }
+    header h1 {
+      font-size:1.5em;
+      background:linear-gradient(45deg,#4BC9FF,#5B3FFF);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
 
-    /* main grid */
-    main{ z-index:10; position:relative; max-width:1200px; margin:30px auto; padding:0 20px 80px; }
-    .hero{ display:grid; grid-template-columns: 1fr 460px; gap:28px; align-items:center; margin-top:24px; }
-    .title{ font-size:36px; line-height:1.03; font-weight:700; color: #ffffff; }
-    .subtitle{ margin-top:10px; color:var(--muted); max-width:640px; font-weight:500; }
+    nav button {
+      background: transparent;
+      color: #fff;
+      border: none;
+      margin-left: 20px;
+      font-size: 1em;
+      cursor: pointer;
+      position: relative;
+      transition: all .3s;
+    }
 
-    /* mock chat */
-    .chat-card{ border-radius:20px; padding:18px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.04); box-shadow: 0 12px 40px rgba(3,8,20,0.6); }
-    .msg{ padding:10px 12px; border-radius:12px; max-width:70%; margin:8px 0; font-size:14px; color:#eaf0ff; }
-    .msg.bot{ background:rgba(255,255,255,0.06); }
-    .msg.user{ background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:white; margin-left:auto; }
+    nav button::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #4BC9FF, #5B3FFF);
+      transition: width .3s;
+    }
 
-    /* sections */
-    section{ margin-top:36px; }
-    .grid-3{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
-    .card{ padding:18px; border-radius:14px; background: linear-gradient(180deg,var(--card-grad-from),var(--card-grad-to)); border:1px solid rgba(255,255,255,0.04); backdrop-filter: blur(6px); }
-    .small{ color:var(--muted); font-size:13px; }
+    nav button:hover::after, nav button.active::after {
+      width: 100%;
+    }
 
-    /* socials list */
-    .social-link{ display:flex; gap:12px; align-items:center; padding:12px; border-radius:12px; background:var(--glass-2); border:1px solid rgba(255,255,255,0.03); text-decoration:none; color:inherit; transition: transform .16s ease, box-shadow .16s ease; }
-    .social-link:hover{ transform: translateX(6px); box-shadow: 0 10px 30px rgba(11,18,40,0.5); }
-    .s-icon{ width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.02); }
+    section {
+      display:none;
+      padding:120px 60px 60px;
+      min-height:100vh;
+      animation: fade 0.6s ease;
+    }
+    section.active {display:block;}
 
-    /* footer */
-    footer{ margin-top:40px; text-align:center; color:var(--muted); font-size:13px; padding:30px 0 80px; }
+    @keyframes fade {from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
 
-    /* wave decorations (bottom) */
-    .wave{ position:absolute; left:0; right:0; pointer-events:none; z-index:5; opacity:0.9; }
+    /* Фон с волнами */
+    .wave {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 200px;
+      background: rgba(91,63,255,0.4);
+      opacity: 0.6;
+      border-radius: 100%;
+      animation: waveAnim 8s infinite linear;
+      z-index: 0;
+    }
+    .wave:nth-child(2) {
+      background: rgba(75,201,255,0.4);
+      animation-duration: 12s;
+    }
+    @keyframes waveAnim {
+      0% {transform: translateX(0);}
+      100% {transform: translateX(-50%);}
+    }
 
-    /* animations (simple) */
-    .fade-up{ opacity:0; transform: translateY(10px); transition: transform .6s cubic-bezier(.2,.9,.2,1), opacity .6s ease; }
-    .in-view{ opacity:1; transform: translateY(0); }
-    .btn-glass{ padding:10px 14px; border-radius:10px; background:var(--glass); border:1px solid rgba(255,255,255,0.06); cursor:pointer; }
+    /* Частицы */
+    .particle {
+      position: fixed;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: float 10s infinite ease-in-out;
+      z-index: 1;
+    }
+    @keyframes float {
+      0% {transform: translateY(0) scale(1);}
+      50% {transform: translateY(-20px) scale(1.2);}
+      100% {transform: translateY(0) scale(1);}
+    }
 
-    /* responsive */
-    @media (max-width:980px){
-      .hero{ grid-template-columns: 1fr; }
-      .mobile-select{ display:inline-block; }
-      nav{ display:none; }
-      .chat-card{ order:2; }
+    /* Контент */
+    h2 {font-size:2.2em; margin-bottom:20px;}
+    p {max-width:800px; line-height:1.6; margin-bottom:10px; color:#ddd;}
+
+    .social-links a {
+      display:flex;
+      align-items:center;
+      margin:10px 0;
+      text-decoration:none;
+      color:#fff;
+      transition:0.3s;
+    }
+    .social-links a:hover {color:#4BC9FF;}
+    .social-links img {
+      width:30px;
+      margin-right:10px;
+      filter: brightness(0) invert(1);
+    }
+
+    footer {
+      text-align:center;
+      padding:20px;
+      color:#aaa;
+      border-top:1px solid rgba(255,255,255,0.1);
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="wave"></div>
+  <div class="wave"></div>
 
-    <!-- particles container -->
-    <div id="tsparticles" style="position:absolute; inset:0; z-index:0;"></div>
+  <header>
+    <h1>SW Consultant</h1>
+    <nav>
+      <button class="active" onclick="showSection('home')">Главная</button>
+      <button onclick="showSection('news')">Новости</button>
+      <button onclick="showSection('offers')">Акции</button>
+      <button onclick="showSection('contacts')">Контакты</button>
+      <button onclick="showSection('socials')">Соцсети</button>
+    </nav>
+  </header>
 
-    <!-- top wave -->
-    <div class="wave" style="top:0;">
-      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="width:100%; height:100px;">
-        <defs>
-          <linearGradient id="gTop" x1="0" x2="1">
-            <stop offset="0" stop-color="#5B3FFF" stop-opacity="0.18"></stop>
-            <stop offset="1" stop-color="#4BC9FF" stop-opacity="0.06"></stop>
-          </linearGradient>
-        </defs>
-        <path d="M0,20 C200,80 420,0 720,40 C1020,80 1240,30 1440,50 L1440 0 L0 0 Z" fill="url(#gTop)"></path>
-      </svg>
+  <section id="home" class="active">
+    <h2>Добро пожаловать в SW Consultant</h2>
+    <p>Ваш персональный Telegram помощник для бизнеса. Автоматизация, аналитика и продвижение — всё в одном месте.</p>
+    <p><button style="padding:10px 20px; border:none; background:linear-gradient(90deg,#5B3FFF,#4BC9FF); color:#fff; border-radius:8px; cursor:pointer;">Открыть бота</button></p>
+  </section>
+
+  <section id="news">
+    <h2>Новости бота</h2>
+    <p>🟣 Новая версия с улучшенным интерфейсом.</p>
+    <p>🔵 Теперь доступен интегрированный планировщик задач.</p>
+  </section>
+
+  <section id="offers">
+    <h2>Актуальные акции</h2>
+    <p>💎 Пригласи друга и получи месяц Premium бесплатно.</p>
+    <p>💼 Скидка 30% для бизнес-партнёров до конца месяца.</p>
+  </section>
+
+  <section id="contacts">
+    <h2>Контактная информация</h2>
+    <p>📞 Телефон: <b>[вставь свой]</b></p>
+    <p>✉️ Почта: <b>[вставь свой email]</b></p>
+    <p>💬 Техподдержка (Telegram): <b>[вставь свой @username]</b></p>
+  </section>
+
+  <section id="socials">
+    <h2>Мы в соцсетях</h2>
+    <div class="social-links">
+      <a href="#" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670125.png"/> YouTube</a>
+      <a href="#" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"/> Telegram канал</a>
+      <a href="#" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968872.png"/> Boosty</a>
+      <a href="#" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png"/> Instagram</a>
+      <a href="#" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"/> TikTok</a>
     </div>
+  </section>
 
-    <!-- header -->
-    <header>
-      <div class="brand">
-        <div class="logo">SW</div>
-        <div>
-          <div style="font-weight:700;">SW Consultant</div>
-          <div style="font-size:12px;color:var(--muted);">Telegram Bot — помощник для бизнеса</div>
-        </div>
-      </div>
-
-      <!-- desktop nav -->
-      <nav>
-        <button class="nav-btn" data-route="home">Главная</button>
-        <button class="nav-btn" data-route="news">Новости</button>
-        <button class="nav-btn" data-route="offers">Акции</button>
-        <button class="nav-btn" data-route="contacts">Контакты</button>
-        <button class="nav-btn" data-route="socials">Соцсети</button>
-        <button class="cta" id="open-chat">Открыть чат</button>
-      </nav>
-
-      <!-- mobile select -->
-      <select class="mobile-select" id="mobile-route" title="Навигация">
-        <option value="home">Главная</option>
-        <option value="news">Новости</option>
-        <option value="offers">Акции</option>
-        <option value="contacts">Контакты</option>
-        <option value="socials">Соцсети</option>
-      </select>
-    </header>
-
-    <!-- main content -->
-    <main>
-
-      <!-- HOME -->
-      <section id="home" class="page">
-        <div class="hero">
-          <div>
-            <h1 class="title fade-up">SW Consultant
-              <div style="font-size:16px;font-weight:500;color:var(--muted); margin-top:8px;">Телеграм-бот для автоматизации продаж и поддержки</div>
-            </h1>
-            <p class="subtitle fade-up" style="margin-top:18px;">
-              Помогает подбирать продукцию, вести клиентов, генерировать посты и повышать продажи. Интеграция с CRM, отчёты и персональные рекомендации.
-            </p>
-
-            <div style="margin-top:20px; display:flex; gap:12px;" class="fade-up">
-              <button class="cta" id="hero-chat">Открыть чат</button>
-              <button class="btn-glass" data-route="contacts">Контакты</button>
-            </div>
-
-            <div style="margin-top:22px; display:flex; gap:12px; color:var(--muted); font-size:13px;" class="fade-up">
-              <div>Быстрая интеграция</div>
-              <div>•</div>
-              <div>Отчёты в один клик</div>
-              <div>•</div>
-              <div>Поддержка 24/7</div>
-            </div>
-          </div>
-
-          <!-- mock chat card -->
-          <div class="chat-card fade-up" aria-hidden="false">
-            <div style="height:14px; width:100%; display:flex; gap:8px;">
-              <div style="height:10px; width:60px; border-radius:8px; background:linear-gradient(90deg,var(--accent-1),var(--accent-2));"></div>
-              <div style="height:10px; width:120px; border-radius:8px; background:rgba(255,255,255,0.03);"></div>
-            </div>
-
-            <div style="margin-top:14px; max-height:380px; overflow:auto;">
-              <div class="msg bot">Привет! Я помогу подобрать продукты для твоего бизнеса.</div>
-              <div class="msg user">Покажи мне популярные товары</div>
-              <div class="msg bot">Конечно — сколько у вас бюджет на закуп?</div>
-              <div class="msg user">От 50 000</div>
-            </div>
-
-            <div style="margin-top:14px; display:flex; gap:8px;">
-              <input placeholder="Напишите сообщение..." style="flex:1; padding:10px 12px; border-radius:10px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.03); color:inherit;" />
-              <button class="cta">Отправить</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- NEWS -->
-      <section id="news" class="page" style="display:none;">
-        <h2 class="fade-up" style="font-size:22px; font-weight:700;">Новости</h2>
-        <p class="small fade-up">Последние обновления и улучшения бота.</p>
-
-        <div class="grid-3" style="margin-top:14px;">
-          <!-- sample news cards -->
-          <article class="card fade-up">
-            <div class="small">01 октября 2025</div>
-            <h3 style="margin-top:8px; font-weight:700;">Новая интеграция с CRM</h3>
-            <p class="small" style="margin-top:8px;">Теперь бот может автоматически передавать лиды в популярные CRM системы.</p>
-            <div style="margin-top:12px;"><button class="nav-btn">Читать</button></div>
-          </article>
-
-          <article class="card fade-up">
-            <div class="small">15 сентября 2025</div>
-            <h3 style="margin-top:8px; font-weight:700;">Обновлён интеллект подбора</h3>
-            <p class="small" style="margin-top:8px;">Алгоритмы подбора стали точнее — рост конверсии до 18%.</p>
-            <div style="margin-top:12px;"><button class="nav-btn">Читать</button></div>
-          </article>
-
-          <article class="card fade-up">
-            <div class="small">01 августа 2025</div>
-            <h3 style="margin-top:8px; font-weight:700;">Оптимизация отчётов</h3>
-            <p class="small" style="margin-top:8px;">Отчёты теперь приходят в удобном формате XLS и PDF.</p>
-            <div style="margin-top:12px;"><button class="nav-btn">Читать</button></div>
-          </article>
-        </div>
-      </section>
-
-      <!-- OFFERS -->
-      <section id="offers" class="page" style="display:none;">
-        <h2 class="fade-up" style="font-size:22px; font-weight:700;">Актуальные акции</h2>
-        <p class="small fade-up">Текущие предложения и специальные условия.</p>
-
-        <div style="margin-top:16px; display:grid; gap:12px;">
-          <div class="card fade-up" style="display:flex; justify-content:space-between; align-items:center;">
-            <div>
-              <div class="small">Акция</div>
-              <div style="font-weight:700; margin-top:6px;">Скидка 20% на первый месяц</div>
-              <div class="small" style="margin-top:8px;">Для новых клиентов при оплате годового тарифа.</div>
-            </div>
-            <div><button class="cta">Узнать</button></div>
-          </div>
-
-          <div class="card fade-up" style="display:flex; justify-content:space-between; align-items:center;">
-            <div>
-              <div class="small">Партнёрство</div>
-              <div style="font-weight:700; margin-top:6px;">Бонусы партнёрам</div>
-              <div class="small" style="margin-top:8px;">Реферальная программа с выплатой до 15%.</div>
-            </div>
-            <div><button class="cta">Подробнее</button></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACTS -->
-      <section id="contacts" class="page" style="display:none;">
-        <h2 class="fade-up" style="font-size:22px; font-weight:700;">Контакты</h2>
-        <p class="small fade-up">Здесь ты заменишь контакты — телефона, почты и TG саппорта</p>
-
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin-top:14px;">
-          <div class="card fade-up">
-            <div class="small">Телефон</div>
-            <div style="font-weight:700; margin-top:6px;">+7 (___) ___-__-__</div> <!-- TODO: заменить -->
-
-            <div class="small" style="margin-top:14px;">E-mail</div>
-            <div style="font-weight:700; margin-top:6px;">example@domain.com</div> <!-- TODO: заменить -->
-
-            <div class="small" style="margin-top:14px;">Техподдержка (Telegram)</div>
-            <div style="font-weight:700; margin-top:6px;">@your_support</div> <!-- TODO: заменить -->
-          </div>
-
-          <div class="card fade-up">
-            <div style="font-weight:700; margin-bottom:8px;">Форма обратной связи</div>
-            <form id="contact-form" onsubmit="event.preventDefault(); alert('TODO: подключить отправку формы');">
-              <input name="name" placeholder="Имя" style="width:100%; padding:10px; margin-bottom:8px; border-radius:8px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.03); color:inherit;" />
-              <input name="email" placeholder="Email" style="width:100%; padding:10px; margin-bottom:8px; border-radius:8px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.03); color:inherit;" />
-              <textarea name="msg" placeholder="Сообщение" rows="6" style="width:100%; padding:10px; margin-bottom:8px; border-radius:8px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.03); color:inherit;"></textarea>
-              <button class="cta" type="submit">Отправить</button>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <!-- SOCIALS -->
-      <section id="socials" class="page" style="display:none;">
-        <h2 class="fade-up" style="font-size:22px; font-weight:700;">Соцсети и ссылки</h2>
-        <p class="small fade-up">Добавь свои ссылки в атрибут href (ниже отмечены TODO)</p>
-
-        <div style="margin-top:12px; display:grid; gap:10px;">
-          <!-- YouTube -->
-          <a class="social-link fade-up" href="#" data-href="<!-- TODO: YOUTUBE_LINK -->" onclick="event.preventDefault(); alert('Замените href в коде на ссылку');">
-            <div class="s-icon" aria-hidden="true">
-              <!-- small minimalist SVG youtube -->
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M22 7.5s-.2-1.6-.8-2.3c-.8-.9-1.7-.9-2.1-1C15.6 3.8 12 3.8 12 3.8s-3.6 0-6.9.4c-.4 0-1.3.1-2.1 1C2.2 5.9 2 7.5 2 7.5S1.8 9.3 1.8 11.1v1.8c0 1.8.2 3.6.2 3.6s.2 1.6.8 2.3c.8.9 1.8.9 2.3 1 1.7.2 7 .4 7 .4s3.6 0 6.9-.4c.4 0 1.3-.1 2.1-1 .6-.7.8-2.3.8-2.3s.2-1.8.2-3.6v-1.8C22.2 9.3 22 7.5 22 7.5z" fill="url(#yg)"></path>
-                <path d="M10 15V9l5 3-5 3z" fill="#fff"></path>
-                <defs><linearGradient id="yg" x1="0" x2="1"><stop offset="0" stop-color="#FF5F6D"/><stop offset="1" stop-color="#FFC371"/></linearGradient></defs>
-              </svg>
-            </div>
-            <div>
-              <div style="font-weight:700;">YouTube</div>
-              <div class="small">Ссылка на канал</div>
-            </div>
-          </a>
-
-          <!-- Bot link -->
-          <a class="social-link fade-up" href="#" data-href="<!-- TODO: BOT_LINK (tg://resolve?domain=...) -->" onclick="event.preventDefault(); alert('Замените href в коде на ссылку бота');">
-            <div class="s-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#00b7ff" d="M12 2L2 7v10l10 5 10-5V7z"/></svg>
-            </div>
-            <div>
-              <div style="font-weight:700;">Бот</div>
-              <div class="small">Ссылка на бота</div>
-            </div>
-          </a>
-
-          <!-- Telegram channel -->
-          <a class="social-link fade-up" href="#" data-href="<!-- TODO: TG_CHANNEL_LINK -->" onclick="event.preventDefault(); alert('Замените href в коде на ссылку канала');">
-            <div class="s-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#1DA1F2" d="M2 12c0 5.5 4.5 10 10 10s10-4.5 10-10S17.5 2 12 2 2 6.5 2 12z"/></svg>
-            </div>
-            <div>
-              <div style="font-weight:700;">Telegram-канал</div>
-              <div class="small">Ссылка на канал</div>
-            </div>
-          </a>
-
-          <!-- Boosty -->
-          <a class="social-link fade-up" href="#" data-href="<!-- TODO: BOOSTY_LINK -->" onclick="event.preventDefault(); alert('Замените href в коде на Boosty ссылку');">
-            <div class="s-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ff6b6b"></circle></svg>
-            </div>
-            <div>
-              <div style="font-weight:700;">Boosty</div>
-              <div class="small">Ссылка на Boosty</div>
-            </div>
-          </a>
-
-          <!-- Instagram -->
-          <a class="social-link fade-up" href="#" data-href="<!-- TODO: IG_LINK -->" onclick="event.preventDefault(); alert('Замените href в коде на Instagram ссылку');">
-            <div class="s-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="4" fill="#c13584"></rect></svg>
-            </div>
-            <div>
-              <div style="font-weight:700;">Instagram</div>
-              <div class="small">Ссылка на профиль</div>
-            </div>
-          </a>
-
-          <!-- TikTok -->
-          <a class="social-link fade-up" href="#" data-href="<!-- TODO: TIKTOK_LINK -->" onclick="event.preventDefault(); alert('Замените href в коде на TikTok ссылку');">
-            <div class="s-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24"><path d="M6 3v12a6 6 0 1 0 6-6V5h3V3H6z" fill="#fff"></path></svg>
-            </div>
-            <div>
-              <div style="font-weight:700;">TikTok</div>
-              <div class="small">Ссылка на профиль</div>
-            </div>
-          </a>
-        </div>
-      </section>
-
-      <!-- bottom wave -->
-      <div class="wave" style="bottom:0;">
-        <svg viewBox="0 0 1440 160" preserveAspectRatio="none" style="width:100%; height:140px;">
-          <defs>
-            <linearGradient id="gBottom" x1="0" x2="1">
-              <stop offset="0" stop-color="#4BC9FF" stop-opacity="0.06"></stop>
-              <stop offset="1" stop-color="#5B3FFF" stop-opacity="0.12"></stop>
-            </linearGradient>
-          </defs>
-          <path d="M0,40 C260,130 540,0 840,70 C1140,140 1320,30 1440,60 L1440 160 L0 160 Z" fill="url(#gBottom)"></path>
-        </svg>
-      </div>
-
-    </main>
-
-    <footer>
-      © <span id="year"></span> SW Consultant — Telegram Bot. Все права защищены.
-    </footer>
-  </div>
+  <footer>
+    © 2025 SW Consultant. Все права защищены.
+  </footer>
 
   <script>
-    // set year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Переключение разделов
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
 
-    // pages logic (single-file SPA)
-    const pages = ['home','news','offers','contacts','socials'];
-    function showPage(key){
-      pages.forEach(p => {
-        const el = document.getElementById(p);
-        if(!el) return;
-        if(p === key){ el.style.display = ''; animateIn(el); } else { el.style.disp
+    // Создаём частицы
+    for (let i = 0; i < 40; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 6 + 3;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      document.body.appendChild(p);
+    }
+  </script>
+</body>
+</html>
