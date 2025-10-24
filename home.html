@@ -1,441 +1,217 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>SW Consultant — Telegram бот</title>
-<meta name="theme-color" content="#0b1220" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SW Consultant</title>
 <style>
-  /* ====== Mobile-first styles ====== */
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-  :root{
-    --bg-1: #060717;
-    --bg-2: #081029;
-    --accent-a: #5B3FFF; /* purple */
-    --accent-b: #4BC9FF; /* cyan */
-    --muted: #b6c1d9;
-    --glass: rgba(255,255,255,0.04);
-    --card: rgba(255,255,255,0.03);
-    --radius: 14px;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%; margin:0; font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; background: linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:#eef6ff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
-  a{color:inherit; text-decoration:none}
-
-  /* Layout */
-  .page{min-height:100vh; position:relative; overflow:hidden; padding-bottom:96px}
-  header{
-    position:sticky; top:0; z-index:40;
-    display:flex; align-items:center; justify-content:space-between;
-    gap:12px; padding:12px 16px;
-    background: linear-gradient(180deg, rgba(6,7,23,0.6), rgba(6,7,23,0.3));
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255,255,255,0.03);
-  }
-  .brand { display:flex; align-items:center; gap:10px; }
-  .logo{
-    width:44px; height:44px; border-radius:10px;
-    background: linear-gradient(135deg,var(--accent-a),var(--accent-b));
-    display:flex; align-items:center; justify-content:center; font-weight:700; color:white; box-shadow: 0 8px 30px rgba(91,63,255,0.12);
-  }
-  .brand .title{ font-weight:600; font-size:16px; letter-spacing:0.2px }
-  .brand .sub{ font-size:11px; color:var(--muted); margin-top:2px; }
-
-  /* Top nav (buttons) */
-  .nav {
-    display:flex; gap:8px; align-items:center;
-  }
-  .nav button{
-    appearance:none; border:0; background:transparent; color:#eaf0ff;
-    padding:8px 10px; border-radius:10px; font-weight:600; font-size:14px;
-    transition: transform .14s ease, box-shadow .14s ease, background .14s ease;
-  }
-  .nav button.active{ background: linear-gradient(90deg,var(--accent-a),var(--accent-b)); box-shadow: 0 8px 26px rgba(75,201,255,0.08); color:white; }
-  .nav button:active{ transform: translateY(1px) scale(.997); }
-
-  /* Bottom nav for mobile */
-  .bottom-nav {
-    position: fixed; left: 12px; right: 12px; bottom: 18px; z-index:45;
-    display:flex; gap:8px; justify-content:space-between; padding:10px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius: 12px; box-shadow: 0 12px 40px rgba(3,8,20,0.6); border:1px solid rgba(255,255,255,0.04);
-    backdrop-filter: blur(8px);
-  }
-  .bn-btn{ flex:1; text-align:center; padding:8px 6px; border-radius:10px; color:#dfe9ff; font-weight:600; font-size:13px; background:transparent; border:0; }
-
-  /* Main content */
-  .container{ padding:18px; max-width:980px; margin:0 auto; position:relative; z-index:30 }
-  .hero{ display:flex; gap:14px; align-items:flex-start; }
-  .hero .left{ flex:1; }
-  .h1{ font-size:28px; line-height:1.03; font-weight:700; margin-bottom:8px }
-  .lead{ color:var(--muted); font-size:14px; margin-bottom:14px }
-
-  .actions{ display:flex; gap:10px; margin-top:10px; flex-wrap:wrap }
-  .btn-primary{ background: linear-gradient(90deg,var(--accent-a),var(--accent-b)); color:white; padding:12px 14px; border-radius:12px; font-weight:700; border:0; box-shadow: 0 12px 36px rgba(75,201,255,0.08); font-size:15px }
-  .btn-ghost{ background:var(--glass); color:#eaf0ff; padding:11px 12px; border-radius:12px; border:1px solid rgba(255,255,255,0.04); font-weight:600 }
-
-  /* Chat mock */
-  .chat-mock{ margin-top:14px; border-radius:14px; padding:12px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.04); box-shadow: 0 12px 30px rgba(3,8,20,0.6) }
-  .msg{ padding:10px 12px; border-radius:12px; margin-top:10px; max-width:78%; font-size:14px }
-  .msg.bot{ background: rgba(255,255,255,0.03); color:#eaf0ff }
-  .msg.user{ background: linear-gradient(90deg,var(--accent-a),var(--accent-b)); color:white; margin-left:auto }
-
-  /* Section cards */
-  .cards{ display:grid; grid-template-columns:1fr; gap:12px; margin-top:12px }
-  .card{ padding:12px; border-radius:12px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03) }
-  .muted{ color:var(--muted); font-size:13px }
-
-  /* Social list */
-  .social-list{ display:flex; flex-direction:column; gap:10px; margin-top:6px }
-  .social-item{ display:flex; gap:12px; align-items:center; padding:10px; border-radius:10px; background:var(--card); border:1px solid rgba(255,255,255,0.03) }
-  .s-icon{ width:40px; height:40px; border-radius:8px; display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
-
-  /* Footer */
-  footer{ padding:18px; text-align:center; color:var(--muted); font-size:13px; margin-top:26px }
-
-  /* SVG waves background (big) */
-  .bg-waves{ position:absolute; inset:0; z-index:10; pointer-events:none; overflow:hidden }
-  .wave-wrap{ position:absolute; left:-20%; width:140%; height:60vh; top:-8vh; opacity:0.18; transform:translate3d(0,0,0) }
-  .wave-wrap svg{ width:100%; height:100% }
-  /* animate the group to move horizontally creating flowing effect */
-  .wave-group{ transform-origin:center; animation: waveMove 10s linear infinite; }
-  .wave-group.alt{ animation-duration:14s; opacity:0.8 }
-  @keyframes waveMove{
-    from{ transform: translateX(0) }
-    to{ transform: translateX(-20%) }
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, #1a173b, #0b0f29);
+    color: white;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
   }
 
-  /* Fade transition for sections */
-  .section{ opacity:0; transform: translateY(10px); transition: opacity .42s cubic-bezier(.2,.9,.2,1), transform .42s cubic-bezier(.2,.9,.2,1) }
-  .section.show{ opacity:1; transform: translateY(0) }
-
-  /* Floating support button */
-  .support{
-    position: fixed; right: 14px; bottom: 86px; z-index:60;
-    display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:999px;
-    background: linear-gradient(90deg,var(--accent-a),var(--accent-b)); color:white; font-weight:700; box-shadow: 0 18px 50px rgba(75,201,255,0.12);
-    text-decoration:none;
+  /* Заставка */
+  #splash {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at center, #5c4bff, #241654);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeOut 2s ease 3s forwards;
+    z-index: 100;
   }
 
-  /* Responsive */
-  @media(min-width:720px){
-    .hero{ align-items:center }
-    .h1{ font-size:34px }
-    .cards{ grid-template-columns: repeat(2, 1fr) }
+  #splash img {
+    width: 120px;
+    height: auto;
+    opacity: 0;
+    animation: fadeIn 1.5s ease forwards;
   }
-  @media(min-width:980px){
-    .container{ padding:28px 36px; }
-    .nav{ gap:12px }
-    .bottom-nav{ display:none }
+
+  #splash h1 {
+    font-size: 1.8em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    opacity: 0;
+    animation: fadeIn 1.5s ease 0.5s forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+  }
+
+  /* Волны */
+  .wave {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 150px;
+    background: radial-gradient(circle at 50% 0%, rgba(100, 140, 255, 0.5), transparent 70%);
+    animation: waveMove 6s linear infinite;
+    z-index: 0;
+  }
+
+  @keyframes waveMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Контент */
+  main {
+    position: relative;
+    z-index: 1;
+    padding: 100px 20px 80px;
+    text-align: center;
+  }
+
+  section {
+    margin-bottom: 100px;
+  }
+
+  h2 {
+    color: #9db8ff;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #d1d1e9;
+    font-size: 0.95em;
+    line-height: 1.5em;
+  }
+
+  /* Меню */
+  nav {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    border-radius: 20px;
+    padding: 10px 0;
+    z-index: 10;
+  }
+
+  nav button {
+    background: none;
+    border: none;
+    color: #aab7ff;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+  }
+
+  nav button:hover, nav button.active {
+    color: #ffffff;
+  }
+
+  /* Контакты */
+  .contacts, .socials {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .contact-item, .social-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #d0d0ff;
+    font-size: 0.9em;
+  }
+
+  .social-item img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
   }
 </style>
 </head>
-<body class="page">
+<body>
 
-  <!-- animated SVG waves background -->
-  <div class="bg-waves" aria-hidden="true">
-    <div class="wave-wrap">
-      <svg viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="gA" x1="0" x2="1">
-            <stop offset="0" stop-color="#5B3FFF"/>
-            <stop offset="1" stop-color="#4BC9FF"/>
-          </linearGradient>
-          <linearGradient id="gB" x1="0" x2="1">
-            <stop offset="0" stop-color="#4BC9FF"/>
-            <stop offset="1" stop-color="#5B3FFF"/>
-          </linearGradient>
-        </defs>
+<!-- Заставка -->
+<div id="splash">
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAYAAAA+7nH7AAA..." alt="Logo">
+  <h1>SW Consultant</h1>
+</div>
 
-        <!-- group 1 (front) -->
-        <g class="wave-group" opacity="0.9" transform="translate(0,40)">
-          <path d="M0 320 C200 240 450 360 800 320 C1150 280 1400 360 1600 320 L1600 600 L0 600 Z"
-                fill="url(#gA)" opacity="0.14"></path>
-          <path d="M0 340 C180 260 420 380 780 340 C1140 300 1380 380 1600 340 L1600 600 L0 600 Z"
-                fill="url(#gB)" opacity="0.09"></path>
-        </g>
+<!-- Волны -->
+<div class="wave" style="animation-delay: 0s; opacity: 0.6;"></div>
+<div class="wave" style="animation-delay: 3s; opacity: 0.4;"></div>
 
-        <!-- group 2 (back, slower) -->
-        <g class="wave-group alt" opacity="0.7" transform="translate(0,10)">
-          <path d="M0 360 C200 280 480 200 800 260 C1120 320 1380 220 1600 260 L1600 600 L0 600 Z"
-                fill="#2f3b6a" opacity="0.06"></path>
-          <path d="M0 380 C240 300 520 220 820 280 C1120 340 1400 240 1600 280 L1600 600 L0 600 Z"
-                fill="#17304f" opacity="0.04"></path>
-        </g>
-      </svg>
+<!-- Контент -->
+<main>
+  <section id="home">
+    <h2>Главная</h2>
+    <p>Добро пожаловать в SW Consultant — умный Telegram помощник для бизнеса, партнёров и клиентов.</p>
+  </section>
+
+  <section id="news">
+    <h2>Новости</h2>
+    <p>Следите за обновлениями нашего бота и узнавайте первыми о новых функциях и акциях!</p>
+  </section>
+
+  <section id="offers">
+    <h2>Актуальные акции</h2>
+    <p>Участвуйте в специальных предложениях и получайте бонусы за активность!</p>
+  </section>
+
+  <section id="contacts">
+    <h2>Контакты</h2>
+    <div class="contacts">
+      <div class="contact-item">📞 +7 771 262 4034</div>
+      <div class="contact-item">📧 swconsultant@mail.ru</div>
+      <div class="contact-item">🤖 Бот: @SWConsultant_Bot</div>
+      <div class="contact-item">🛠 Поддержка: @SWCsupport_Bot</div>
     </div>
-  </div>
+  </section>
 
-  <!-- header -->
-  <header>
-    <div class="brand">
-      <div class="logo">SW</div>
-      <div>
-        <div class="title">SW Consultant</div>
-        <div class="sub">Telegram-бот для бизнеса</div>
-      </div>
+  <section id="socials">
+    <h2>Мы в соцсетях</h2>
+    <div class="socials">
+      <div class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"> <a href="https://t.me/SWconsultantChanel" target="_blank">Telegram</a></div>
+      <div class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png"> <a href="#" target="_blank">Instagram</a></div>
+      <div class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/174/174883.png"> <a href="#" target="_blank">YouTube</a></div>
+      <div class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"> <a href="#" target="_blank">Boosty</a></div>
+      <div class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"> <a href="#" target="_blank">TikTok</a></div>
     </div>
+  </section>
+</main>
 
-    <nav class="nav" role="navigation" aria-label="Главная навигация">
-      <button class="nav-btn active" data-route="home">Главная</button>
-      <button class="nav-btn" data-route="news">Новости</button>
-      <button class="nav-btn" data-route="offers">Акции</button>
-      <button class="nav-btn" data-route="contacts">Контакты</button>
-      <button class="nav-btn" data-route="socials">Соцсети</button>
-    </nav>
-  </header>
-
-  <!-- page container -->
-  <main class="container" role="main">
-    <!-- HOME -->
-    <section id="home" class="section show" aria-label="Главная">
-      <div class="hero">
-        <div class="left">
-          <div class="h1">SW Consultant</div>
-          <div class="lead">Телеграм-бот, который автоматизирует продажи, поддержку и маркетинг для бизнеса — быстро подключаем и настраиваем под задачи.</div>
-
-          <div class="actions">
-            <a class="btn-primary" href="https://t.me/SWConsultant_Bot" target="_blank" rel="noopener">Открыть бота</a>
-            <button class="btn-ghost" data-route="contacts">Контакты</button>
-          </div>
-
-          <div class="chat-mock" style="margin-top:12px;">
-            <div class="msg bot">Привет! Я помогу подобрать продукт и настроить рассылку.</div>
-            <div class="msg user">Расскажи про акции для бизнеса</div>
-            <div class="msg bot">У нас есть скидка 30% для партнёров — расскажу подробнее.</div>
-
-            <div style="margin-top:12px; display:flex; gap:8px;">
-              <input aria-label="сообщение" placeholder="Напишите сообщение..." style="flex:1; padding:10px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); color:inherit">
-              <button class="btn-primary" style="padding:8px 10px">Отправить</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- NEWS -->
-    <section id="news" class="section" aria-label="Новости">
-      <h2>Новости</h2>
-      <div class="cards">
-        <div class="card">
-          <div class="muted">01 октября 2025</div>
-          <div style="margin-top:8px; font-weight:700">Новая интеграция с CRM</div>
-          <div class="muted" style="margin-top:8px">Бот теперь отправляет лиды напрямую в вашу CRM.</div>
-        </div>
-        <div class="card">
-          <div class="muted">15 сентября 2025</div>
-          <div style="margin-top:8px; font-weight:700">Улучшен модуль рекомендаций</div>
-          <div class="muted" style="margin-top:8px">Рекомендации товаров стали точнее — +18% к конверсии.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- OFFERS -->
-    <section id="offers" class="section" aria-label="Акции">
-      <h2>Актуальные акции</h2>
-      <div class="cards">
-        <div class="card">
-          <div class="muted">Промо</div>
-          <div style="font-weight:700; margin-top:6px">Скидка 20% на первый месяц</div>
-          <div class="muted" style="margin-top:8px">При оплате годового тарифа — действует до конца месяца.</div>
-        </div>
-        <div class="card">
-          <div class="muted">Партнёрство</div>
-          <div style="font-weight:700; margin-top:6px">Реферальная программа</div>
-          <div class="muted" style="margin-top:8px">Получите до 15% за приведённого клиента.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACTS -->
-    <section id="contacts" class="section" aria-label="Контакты">
-      <h2>Контакты</h2>
-      <div class="cards">
-        <div class="card">
-          <div class="muted">Телефон</div>
-          <div style="font-weight:700; margin-top:6px"><a href="tel:+77712624034">+7 771 262 4034</a></div>
-
-          <div class="muted" style="margin-top:12px">E-mail</div>
-          <div style="font-weight:700; margin-top:6px"><a href="mailto:swconsultant@mail.ru">swconsultant@mail.ru</a></div>
-
-          <div class="muted" style="margin-top:12px">Техподдержка</div>
-          <div style="font-weight:700; margin-top:6px"><a href="https://t.me/SWCsupport_Bot" target="_blank" rel="noopener">@SWCsupport_Bot</a></div>
-        </div>
-
-        <div class="card">
-          <div style="font-weight:700">Форма обратной связи</div>
-          <div class="muted" style="margin-top:8px">Сообщение придёт на почту (нужна backend-интеграция — при желании сделаю заглушку).</div>
-          <form id="contactForm" style="margin-top:8px; display:flex; flex-direction:column; gap:8px" onsubmit="event.preventDefault(); alert('Форма: пока заглушка — интегрируйте серверную почту или сервис (Mailgun, Formspree и т.д.)')">
-            <input name="name" placeholder="Имя" style="padding:10px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); color:inherit">
-            <input name="email" placeholder="Email" style="padding:10px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); color:inherit">
-            <textarea name="msg" rows="4" placeholder="Сообщение" style="padding:10px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); color:inherit"></textarea>
-            <button class="btn-primary" type="submit">Отправить</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOCIALS -->
-    <section id="socials" class="section" aria-label="Соцсети">
-      <h2>Соцсети и ссылки</h2>
-      <div class="social-list">
-        <a class="social-item" href="https://t.me/SWConsultant_Bot" target="_blank" rel="noopener">
-          <div class="s-icon" aria-hidden="true">
-            <!-- telegram icon -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M2 12l20-7-8 19-3-8-9-4z" fill="#00B6FF"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700">Telegram бот</div>
-            <div class="muted" style="font-size:13px">@SWConsultant_Bot</div>
-          </div>
-        </a>
-
-        <a class="social-item" href="https://t.me/SWconsultantChanel" target="_blank" rel="noopener">
-          <div class="s-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M2 12l20-7-8 19-3-8-9-4z" fill="#00B6FF"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700">Telegram канал</div>
-            <div class="muted" style="font-size:13px">SWConsultantChanel</div>
-          </div>
-        </a>
-
-        <a class="social-item" href="#" target="_blank" rel="noopener" onclick="alert('Замените ссылку на YouTube в коде')">
-          <div class="s-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M10 15V9l5 3-5 3z" fill="#fff"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700">YouTube</div>
-            <div class="muted" style="font-size:13px">Ссылка — TODO</div>
-          </div>
-        </a>
-
-        <a class="social-item" href="#" target="_blank" rel="noopener" onclick="alert('Замените ссылку на Boosty в коде')">
-          <div class="s-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ff6b6b"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700">Boosty</div>
-            <div class="muted" style="font-size:13px">Ссылка — TODO</div>
-          </div>
-        </a>
-
-        <a class="social-item" href="#" target="_blank" rel="noopener" onclick="alert('Замените ссылку на Instagram в коде')">
-          <div class="s-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="4" fill="#c13584"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700">Instagram</div>
-            <div class="muted" style="font-size:13px">Ссылка — TODO</div>
-          </div>
-        </a>
-
-        <a class="social-item" href="#" target="_blank" rel="noopener" onclick="alert('Замените ссылку на TikTok в коде')">
-          <div class="s-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M6 3v12a6 6 0 1 0 6-6V5h3V3H6z" fill="#fff"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700">TikTok</div>
-            <div class="muted" style="font-size:13px">Ссылка — TODO</div>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <footer>
-      © <span id="year"></span> SW Consultant — все права защищены.
-    </footer>
-  </main>
-
-  <!-- floating support button -->
-  <a class="support" href="https://t.me/SWCsupport_Bot" target="_blank" rel="noopener" aria-label="Поддержка в Telegram">
-    <svg width="18" height="18" viewBox="0 0 24 24" style="transform:translateY(1px);"><path d="M2 12l20-7-8 19-3-8-9-4z" fill="#fff"/></svg>
-    Поддержка
-  </a>
-
-  <!-- bottom nav (mobile) -->
-  <div class="bottom-nav" role="navigation" aria-label="Нижняя навигация">
-    <button class="bn-btn" data-route="home">Главная</button>
-    <button class="bn-btn" data-route="news">Новости</button>
-    <button class="bn-btn" data-route="offers">Акции</button>
-    <button class="bn-btn" data-route="contacts">Контакты</button>
-    <button class="bn-btn" data-route="socials">Соцсети</button>
-  </div>
+<!-- Меню -->
+<nav>
+  <button onclick="scrollToSection('home')" class="active">Главная</button>
+  <button onclick="scrollToSection('news')">Новости</button>
+  <button onclick="scrollToSection('offers')">Акции</button>
+  <button onclick="scrollToSection('contacts')">Контакты</button>
+  <button onclick="scrollToSection('socials')">Соцсети</button>
+</nav>
 
 <script>
-  // set year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // navigation logic (single-file SPA)
-  const navBtns = document.querySelectorAll('[data-route].nav-btn, [data-route].nav-btn, .nav button, .bn-btn, .btn-ghost');
-  function showRoute(key, sourceEl){
-    // hide all sections
-    document.querySelectorAll('.section').forEach(s => { s.classList.remove('show'); s.setAttribute('aria-hidden','true'); });
-    const sec = document.getElementById(key);
-    if(sec){ sec.classList.add('show'); sec.removeAttribute('aria-hidden'); }
-
-    // update nav visuals
-    document.querySelectorAll('.nav button').forEach(b => b.classList.toggle('active', b.dataset.route === key));
-    document.querySelectorAll('.bn-btn').forEach(b => b.classList.toggle('active', b.dataset.route === key));
-    // scroll to top of content area smoothly on mobile
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // attach to nav header buttons
-  document.querySelectorAll('.nav button').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      const route = btn.dataset.route || btn.getAttribute('data-route') || btn.textContent.trim().toLowerCase();
-      showRoute(btn.dataset.route || route, btn);
-    });
-  });
-
-  // attach to bottom nav
-  document.querySelectorAll('.bn-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const route = btn.dataset.route;
-      showRoute(route, btn);
-    });
-  });
-
-  // attach to ghost buttons (in content)
-  document.querySelectorAll('[data-route]').forEach(el=>{
-    el.addEventListener('click', (e)=>{
-      const r = el.getAttribute('data-route');
-      if(r) showRoute(r, el);
-    });
-  });
-
-  // initial active state wiring
-  // mark header nav buttons with data-route attributes for reliability
-  document.querySelectorAll('.nav button').forEach(b=>{
-    if(!b.dataset.route){
-      // fallback: map by textContent
-      const t = b.textContent.trim().toLowerCase();
-      if(['главная','home'].includes(t)) b.dataset.route='home';
-      if(['новости','news'].includes(t)) b.dataset.route='news';
-      if(['акции','offers','акции'].includes(t)) b.dataset.route='offers';
-      if(['контакты','contacts'].includes(t)) b.dataset.route='contacts';
-      if(['соцсети','socials'].includes(t)) b.dataset.route='socials';
-    }
-  });
-
-  // small accessibility: keyboard 1..5 shortcuts
-  document.addEventListener('keydown', (e)=>{
-    if(e.key==='1') showRoute('home');
-    if(e.key==='2') showRoute('news');
-    if(e.key==='3') showRoute('offers');
-    if(e.key==='4') showRoute('contacts');
-    if(e.key==='5') showRoute('socials');
-  });
-
-  // progressive reveal for sections already visible
-  document.addEventListener('DOMContentLoaded', ()=>{
-    document.querySelectorAll('.section.show .card, .section.show .chat-mock, .section.show .social-item').forEach((el,i)=>{
-      el.style.opacity=0;
-      setTimeout(()=> el.style.transition='opacity .6s ease', 10);
-      setTimeout(()=> el.style.opacity=1, 120 + i*80);
-    });
-  });
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+}
 </script>
 </body>
 </html>
