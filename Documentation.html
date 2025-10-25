@@ -95,7 +95,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 60px;
+            height: 70px; /* Увеличили высоту шапки */
             z-index: 1000;
             
             /* Эффект стекла */
@@ -125,8 +125,8 @@
         }
 
         .header-logo {
-            width: 40px;
-            height: 40px;
+            width: 45px; /* Увеличили размер логотипа */
+            height: 45px; /* Увеличили размер логотипа */
             background-color: var(--white-color);
             border-radius: 10px; /* Мягкий квадрат */
             display: flex;
@@ -135,7 +135,7 @@
             font-size: 18px;
             font-weight: bold;
             color: var(--primary-color);
-            margin-right: 10px;
+            margin-right: 12px; /* Увеличили отступ */
             flex-shrink: 0;
             overflow: hidden;
         }
@@ -147,7 +147,7 @@
         }
 
         .header-title {
-            font-size: 16px;
+            font-size: 18px; /* Увеличили размер текста */
             font-weight: 600;
             color: var(--primary-color);
         }
@@ -158,10 +158,11 @@
             overflow-x: auto;
             -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
             scrollbar-width: none; /* Скрыть скроллбар в Firefox */
-            margin-left: 15px;
+            margin-left: 20px; /* Увеличили отступ */
             height: 100%;
             display: flex;
             align-items: center;
+            padding: 10px 0; /* Добавили вертикальный отступ */
         }
 
         .nav-scroll-container::-webkit-scrollbar {
@@ -173,20 +174,24 @@
             display: flex;
             list-style: none;
             white-space: nowrap;
-            padding: 5px 0;
+            padding: 0;
+            gap: 12px; /* Использовали gap для отступов между кнопками */
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--primary-color);
             font-weight: 500;
-            font-size: 14px;
-            padding: 8px 12px;
-            margin-left: 5px;
-            border-radius: 8px;
+            font-size: 15px; /* Увеличили размер шрифта */
+            padding: 12px 20px; /* Значительно увеличили отступы */
+            border-radius: 10px; /* Увеличили скругление */
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px; /* Минимальная высота для удобного нажатия */
         }
         
         /* Анимация и эффект стекла для кнопок */
@@ -220,7 +225,7 @@
 
         /* --- ОСНОВНОЕ СОДЕРЖИМОЕ (MAIN) --- */
         main {
-            padding: 80px 15px 20px; /* Добавлен отступ сверху для фиксированного хедера */
+            padding: 90px 15px 20px; /* Добавлен отступ сверху для фиксированного хедера */
         }
 
         .doc-section {
@@ -315,7 +320,7 @@
         @media (min-width: 768px) {
             .nav-links a {
                 font-size: 16px;
-                padding: 10px 15px;
+                padding: 14px 22px; /* Увеличили отступы для планшетов */
             }
             .header-title {
                 font-size: 20px;
@@ -347,7 +352,7 @@
     <!-- Шапка сайта -->
     <header class="site-header">
         <div class="nav-container">
-            <a href="index.html" class="logo-container">
+            <a href="https://sw-consultant.github.io/docs/Home.html" class="logo-container">
                 <div class="header-logo">
                     <img src="logo.png" alt="SW Logo">
                 </div>
@@ -356,12 +361,12 @@
             <div class="nav-scroll-container">
                 <nav>
                     <ul class="nav-links">
-                        <li><a href="index.html">Главная</a></li>
-                        <li><a href="documentation.html" class="active">Документация</a></li>
-                        <li><a href="#">Новости</a></li>
-                        <li><a href="#">Акции</a></li>
-                        <li><a href="#">Соцсети</a></li>
-                        <li><a href="#">Контакты</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Home.html">Главная</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/News.html">Новости</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Promotions.html">Акции</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Contacts.html">Контакты</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Documentation.html" class="active">Документация</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/social.html">Соцсети</a></li>
                     </ul>
                 </nav>
             </div>
