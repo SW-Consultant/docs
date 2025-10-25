@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Мета-теги -->
+    <title>SW Consultant - Контакты</title>
+    <meta name="description" content="Контактная информация для связи с поддержкой SW Consultant. Телефон, email и бот технической поддержки.">
+    <meta name="keywords" content="SW Consultant, контакты, поддержка, техническая помощь, обратная связь">
+
+    <style>
+        /* --- ОБЩИЕ СТИЛИ И ПЕРЕМЕННЫЕ --- */
+        :root {
+            --primary-color: #4a00e0; /* Фиолетовый */
+            --secondary-color: #8e2de2; /* Сиреневый */
+            --accent-color: #00c6ff; /* Голубой */
+            --bg-color: #f4f7f9; /* Очень светло-серый фон */
+            --text-color: #333; /* Темно-серый текст */
+            --white-color: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden; /* Предотвращение горизонтальной прокрутки */
+        }
+
+        /* --- ЗАСТАВКА (SPLASH SCREEN) --- */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .splash-logo {
+            width: 120px;
+            height: 120px;
+            background-color: var(--white-color);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .splash-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .splash-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--white-color);
+        }
+
+        /* --- ШАПКА САЙТА (HEADER) --- */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 1000;
+            
+            /* Эффект стекла */
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Для Safari */
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 0 15px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            flex-shrink: 0;
+        }
+
+        .header-logo {
+            width: 40px;
+            height: 40px;
+            background-color: var(--white-color);
+            border-radius: 10px; /* Мягкий квадрат */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-right: 10px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .header-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        /* Контейнер для горизонтальной прокрутки навигации */
+        .nav-scroll-container {
+            flex-grow: 1;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+            scrollbar-width: none; /* Скрыть скроллбар в Firefox */
+            margin-left: 15px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-scroll-container::-webkit-scrollbar {
+            display: none; /* Скрыть скроллбар в Chrome, Safari, Edge */
+        }
+
+        /* Стили для кнопок навигации */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            white-space: nowrap;
+            padding: 5px 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 14px;
+            padding: 8px 12px;
+            margin-left: 5px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Анимация и эффект стекла для кнопок */
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        /* Выделение активной страницы */
+        .nav-links a.active {
+            background: var(--primary-color);
+            color: var(--white-color);
+            box-shadow: 0 2px 5px rgba(74, 0, 224, 0.3);
+        }
+
+        /* --- ОСНОВНОЕ СОДЕРЖИМОЕ (MAIN) --- */
+        main {
+            padding: 80px 15px 20px; /* Добавлен отступ сверху для фиксированного хедера */
+        }
+
+        .contact-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .contact-section h1 {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-section p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .contact-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .contact-card {
+            background-color: var(--white-color);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px auto;
+            fill: var(--accent-color);
+        }
+
+        .contact-card h3 {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .contact-card p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--white-color);
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .contact-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(142, 45, 226, 0.6);
+        }
+
+        .notice-box {
+            background-color: rgba(74, 0, 224, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .notice-box p {
+            margin: 0;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .contact-info {
+            text-align: left;
+            background-color: var(--white-color);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 30px 0;
+        }
+
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .contact-info strong {
+            color: var(--text-color);
+        }
+
+        /* --- Адаптивность --- */
+        /* Стили для экранов шире мобильных (например, планшеты) */
+        @media (min-width: 768px) {
+            .nav-links a {
+                font-size: 16px;
+                padding: 10px 15px;
+            }
+            .header-title {
+                font-size: 20px;
+            }
+            .contact-cards {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .contact-cards {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Заставка (Splash Screen) -->
+    <div id="splash-screen">
+        <div class="splash-logo">
+            <img src="logo.png" alt="SW Consultant Logo">
+        </div>
+        <h1 class="splash-title">SW Consultant</h1>
+    </div>
+
+    <!-- Шапка сайта -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="https://sw-consultant.github.io/docs/Home.html" class="logo-container">
+                <div class="header-logo">
+                    <img src="logo.png" alt="SW Logo">
+                </div>
+                <span class="header-title">SW Consultant</span>
+            </a>
+            <div class="nav-scroll-container">
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="https://sw-consultant.github.io/docs/Home.html">Главная</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Documentation.html">Документация</a></li>
+                        <li><a href="contacts.html" class="active">Контакты</a></li>
+                        <li><a href="#">Новости</a></li>
+                        <li><a href="#">Акции</a></li>
+                        <li><a href="#">Соцсети</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое страницы -->
+    <main>
+        <!-- Секция с контактами -->
+        <section class="contact-section">
+            <h1>Контакты</h1>
+            
+            <p>Мы всегда рады помочь вам! Если у вас есть предложения, вопросы или вы обнаружили ошибки в работе бота или сайта, пожалуйста, свяжитесь с нами одним из указанных ниже способов.</p>
+            
+            <div class="notice-box">
+                <p>Наши специалисты ответят вам в кратчайшие сроки и постараются решить любой вопрос.</p>
+            </div>
+            
+            <div class="contact-info">
+                <h3>Для связи с нами используйте следующие контакты:</h3>
+                <p><strong>Номер телефона:</strong> +7 771 262 4034</p>
+                <p><strong>Электронная почта:</strong> swconsultant@mail.ru</p>
+                <p><strong>Бот технической поддержки:</strong> t.me/SWCsupport_Bot</p>
+            </div>
+            
+            <div class="contact-cards">
+                <!-- Карточка 1: Телефон -->
+                <div class="contact-card">
+                    <!-- Иконка телефона -->
+                    <svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/></svg>
+                    <h3>Телефон</h3>
+                    <p>+7 771 262 4034</p>
+                    <a href="tel:+77712624034" class="contact-button">Позвонить</a>
+                </div>
+
+                <!-- Карточка 2: Email -->
+                <div class="contact-card">
+                    <!-- Иконка почты -->
+                    <svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
+                    <h3>Электронная почта</h3>
+                    <p>swconsultant@mail.ru</p>
+                    <a href="mailto:swconsultant@mail.ru" class="contact-button">Написать письмо</a>
+                </div>
+
+                <!-- Карточка 3: Бот поддержки -->
+                <div class="contact-card">
+                    <!-- Иконка Telegram -->
+                    <svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.78 5.42-.9 6.8-.11 1.02-.61 1.37-1 1.4-.84.07-1.48-.55-2.29-1.08-1.28-.84-2-1.36-3.22-2.18-1.42-.95-.5-1.48.31-2.34.21-.22 3.9-3.58 3.97-3.88.07-.31-.07-.48-.25-.46-.18.02-2.95 1.87-8.35 5.5-.79.54-1.5.81-2.14.79-.7-.02-2.06-.4-3.07-.73-1.24-.39-2.22-.6-2.13-1.27.05-.35.52-.71 1.43-1.08 7.03-3.07 11.71-5.09 14.04-6.08 1.69-.7 3.24-1.05 4.17-1.03.33.01 1.03.15 1.49.31.48.17.78.38.84.68.06.22.02.52-.4.81z" fill="currentColor"/></svg>
+                    <h3>Бот поддержки</h3>
+                    <p>t.me/SWCsupport_Bot</p>
+                    <a href="https://t.me/SWCsupport_Bot" class="contact-button" target="_blank">Перейти к боту</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Скрипт для скрытия заставки
+        window.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.getElementById('splash-screen');
+
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+            }, 2000); // 2000 миллисекунд = 2 секунды
+        });
+    </script>
+
+</body>
+</html>
