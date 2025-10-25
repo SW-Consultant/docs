@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Мета-теги -->
+    <title>SW Consultant - Соцсети</title>
+    <meta name="description" content="Следите за нами в социальных сетях! Акции, обновления, полезные советы и эксклюзивный контент от SW Consultant.">
+    <meta name="keywords" content="SW Consultant, соцсети, Telegram, YouTube, Basty, TikTok, Instagram">
+
+    <style>
+        /* --- ОБЩИЕ СТИЛИ И ПЕРЕМЕННЫЕ --- */
+        :root {
+            --primary-color: #4a00e0; /* Фиолетовый */
+            --secondary-color: #8e2de2; /* Сиреневый */
+            --accent-color: #00c6ff; /* Голубой */
+            --bg-color: #f4f7f9; /* Очень светло-серый фон */
+            --text-color: #333; /* Темно-серый текст */
+            --white-color: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden; /* Предотвращение горизонтальной прокрутки */
+        }
+
+        /* --- ЗАСТАВКА (SPLASH SCREEN) --- */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .splash-logo {
+            width: 120px;
+            height: 120px;
+            background-color: var(--white-color);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .splash-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .splash-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--white-color);
+        }
+
+        /* --- ШАПКА САЙТА (HEADER) --- */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px; /* Увеличили высоту шапки */
+            z-index: 1000;
+            
+            /* Эффект стекла */
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Для Safari */
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 0 15px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            flex-shrink: 0;
+        }
+
+        .header-logo {
+            width: 45px; /* Увеличили размер логотипа */
+            height: 45px; /* Увеличили размер логотипа */
+            background-color: var(--white-color);
+            border-radius: 10px; /* Мягкий квадрат */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-right: 12px; /* Увеличили отступ */
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .header-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .header-title {
+            font-size: 18px; /* Увеличили размер текста */
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        /* Контейнер для горизонтальной прокрутки навигации */
+        .nav-scroll-container {
+            flex-grow: 1;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+            scrollbar-width: none; /* Скрыть скроллбар в Firefox */
+            margin-left: 20px; /* Увеличили отступ */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 10px 0; /* Добавили вертикальный отступ */
+        }
+
+        .nav-scroll-container::-webkit-scrollbar {
+            display: none; /* Скрыть скроллбар в Chrome, Safari, Edge */
+        }
+
+        /* Стили для кнопок навигации */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            white-space: nowrap;
+            padding: 0;
+            gap: 12px; /* Использовали gap для отступов между кнопками */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 15px; /* Увеличили размер шрифта */
+            padding: 12px 20px; /* Значительно увеличили отступы */
+            border-radius: 10px; /* Увеличили скругление */
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px; /* Минимальная высота для удобного нажатия */
+        }
+        
+        /* Анимация и эффект стекла для кнопок */
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        /* Выделение активной страницы */
+        .nav-links a.active {
+            background: var(--primary-color);
+            color: var(--white-color);
+            box-shadow: 0 2px 5px rgba(74, 0, 224, 0.3);
+        }
+
+        /* --- ОСНОВНОЕ СОДЕРЖИМОЕ (MAIN) --- */
+        main {
+            padding: 90px 15px 20px; /* Увеличили отступ сверху из-за большей высоты шапки */
+        }
+
+        .social-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .social-section h1 {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .social-section p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        .social-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .social-card {
+            background-color: var(--white-color);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            margin-right: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: rgba(74, 0, 224, 0.1);
+        }
+
+        .social-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--primary-color);
+        }
+
+        .social-content {
+            flex-grow: 1;
+        }
+
+        .social-title {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .social-description {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .social-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white-color);
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(142, 45, 226, 0.4);
+        }
+
+        .notice-box {
+            background-color: rgba(74, 0, 224, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .notice-box p {
+            margin: 0;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        /* --- Адаптивность --- */
+        /* Стили для экранов шире мобильных (например, планшеты) */
+        @media (min-width: 768px) {
+            .nav-links a {
+                font-size: 16px;
+                padding: 14px 22px; /* Увеличили отступы для планшетов */
+            }
+            .header-title {
+                font-size: 20px;
+            }
+            .social-cards {
+                gap: 30px; /* Увеличили отступы для планшетов */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Заставка (Splash Screen) -->
+    <div id="splash-screen">
+        <div class="splash-logo">
+            <img src="logo.png" alt="SW Consultant Logo">
+        </div>
+        <h1 class="splash-title">SW Consultant</h1>
+    </div>
+
+    <!-- Шапка сайта -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="https://sw-consultant.github.io/docs/Home.html" class="logo-container">
+                <div class="header-logo">
+                    <img src="logo.png" alt="SW Logo">
+                </div>
+                <span class="header-title">SW Consultant</span>
+            </a>
+            <div class="nav-scroll-container">
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="https://sw-consultant.github.io/docs/Home.html">Главная</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Documentation.html">Документация</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/News.html">Новости</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Promotions.html">Акции</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Contacts.html">Контакты</a></li>
+                        <li><a href="social.html" class="active">Соцсети</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое страницы -->
+    <main>
+        <!-- Секция с соцсетями -->
+        <section class="social-section">
+            <h1>Наши социальные сети</h1>
+            
+            <p>Подписывайтесь на наши социальные сети, чтобы быть в курсе всех обновлений, акций, полезных фишек и эксклюзивного контента от SW Consultant. Мы регулярно публикуем интересные материалы, которые помогут вам в работе с нашим ботом и бизнесом!</p>
+            
+            <div class="notice-box">
+                <p>В наших соцсетях вы найдете полезные советы, обучающие материалы, анонсы новых функций и многое другое!</p>
+            </div>
+            
+            <div class="social-cards">
+                <!-- Карточка 1: Telegram -->
+                <div class="social-card">
+                    <div class="social-icon">
+                        <!-- Иконка Telegram -->
+                        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="telegram-a" x1=".66" x2=".851" y1=".437" y2=".802">
+                                    <stop offset="0" stop-color="#37aee2"/>
+                                    <stop offset="1" stop-color="#1e96c8"/>
+                                </linearGradient>
+                                <linearGradient id="telegram-b" x1=".66" x2=".851" y1=".437" y2=".802">
+                                    <stop offset="0" stop-color="#eff7fc"/>
+                                    <stop offset="1" stop-color="#fff"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="120" cy="120" r="120" fill="url(#telegram-a)"/>
+                            <path fill="#c8daea" d="M98 175c-3.888 0-3.227-1.468-4.568-5.17L82 132.207 170 80"/>
+                            <path fill="#a9c6dd" d="M98 175c3 0 4.325-1.372 6-3l16-15.558-19.958-12.035"/>
+                            <path fill="url(#telegram-b)" d="M100.04 144.41l48.36 35.729c5.519 3.045 9.501 1.468 10.876-5.123l19.685-92.763c2.015-8.08-3.08-11.746-8.36-9.349l-115.59 44.571c-7.89 3.165-7.843 7.567-1.438 9.528l29.663 9.259 68.673-43.325c3.242-1.966 6.218-.91 3.776 1.258"/>
+                        </svg>
+                    </div>
+                    <div class="social-content">
+                        <h3 class="social-title">Telegram-канал</h3>
+                        <p class="social-description">Основной канал с важными анонсами, новостями и обновлениями бота. Подписывайтесь, чтобы не пропустить ничего важного!</p>
+                        <a href="#" class="social-button">Перейти в Telegram</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 2: YouTube -->
+                <div class="social-card">
+                    <div class="social-icon">
+                        <!-- Иконка YouTube -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FF0000"/>
+                        </svg>
+                    </div>
+                    <div class="social-content">
+                        <h3 class="social-title">YouTube</h3>
+                        <p class="social-description">Обучающие видео, обзоры функций бота, советы по работе с продукцией и интервью с успешными партнерами.</p>
+                        <a href="#" class="social-button">Перейти на YouTube</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 3: Basty -->
+                <div class="social-card">
+                    <div class="social-icon">
+                        <!-- Иконка Basty (заглушка) -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" fill="#8e2de2"/>
+                            <text x="12" y="16" text-anchor="middle" fill="white" font-size="12" font-weight="bold">B</text>
+                        </svg>
+                    </div>
+                    <div class="social-content">
+                        <h3 class="social-title">Basty</h3>
+                        <p class="social-description">Эксклюзивный контент, прямые эфиры с разработчиками и ответы на ваши вопросы в реальном времени.</p>
+                        <a href="#" class="social-button">Перейти в Basty</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 4: TikTok -->
+                <div class="social-card">
+                    <div class="social-icon">
+                        <!-- Иконка TikTok -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" fill="#000000"/>
+                        </svg>
+                    </div>
+                    <div class="social-content">
+                        <h3 class="social-title">TikTok</h3>
+                        <p class="social-description">Короткие видео с лайфхаками, демонстрацией функций бота и мотивационным контентом для партнеров.</p>
+                        <a href="#" class="social-button">Перейти в TikTok</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 5: Instagram -->
+                <div class="social-card">
+                    <div class="social-icon">
+                        <!-- Иконка Instagram -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <linearGradient id="instagram-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#833ab4"/>
+                                <stop offset="20%" stop-color="#c13584"/>
+                                <stop offset="40%" stop-color="#e1306c"/>
+                                <stop offset="60%" stop-color="#f77737"/>
+                                <stop offset="80%" stop-color="#fcaf45"/>
+                                <stop offset="100%" stop-color="#ffdc80"/>
+                            </linearGradient>
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z" fill="url(#instagram-gradient)"/>
+                        </svg>
+                    </div>
+                    <div class="social-content">
+                        <h3 class="social-title">Instagram</h3>
+                        <p class="social-description">Красивые фото и видео с мероприятиями, историями успеха партнеров и визуальным контентом о продуктах.</p>
+                        <a href="#" class="social-button">Перейти в Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Скрипт для скрытия заставки
+        window.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.getElementById('splash-screen');
+
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+            }, 2000); // 2000 миллисекунд = 2 секунды
+        });
+    </script>
+
+</body>
+</html>
