@@ -65,8 +65,8 @@
         }
 
         .splash-logo {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             background-color: var(--white-color);
             border-radius: 20px;
             display: flex;
@@ -74,6 +74,7 @@
             align-items: center;
             margin-bottom: 20px;
             overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .splash-logo img {
@@ -136,6 +137,13 @@
             color: var(--primary-color);
             margin-right: 10px;
             flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .header-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
         }
 
         .header-title {
@@ -333,7 +341,7 @@
     <!-- Заставка (Splash Screen) -->
     <div id="splash-screen">
         <div class="splash-logo">
-            <img src="file_00000000b29c620aba84fd4b1f9ae118 (2).png" alt="SW Consultant Logo">
+            <img src="logo.png" alt="SW Consultant Logo">
         </div>
         <h1 class="splash-title">SW Consultant</h1>
     </div>
@@ -342,7 +350,9 @@
     <header class="site-header">
         <div class="nav-container">
             <a href="index.html" class="logo-container">
-                <div class="header-logo">SW</div>
+                <div class="header-logo">
+                    <img src="logo.png" alt="SW Logo">
+                </div>
                 <span class="header-title">SW Consultant</span>
             </a>
             <div class="nav-scroll-container">
@@ -406,7 +416,7 @@
                 <!-- Карточка 4: Тарифы -->
                 <div class="feature-card">
                     <!-- Иконка ценника -->
-                    <svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.012 2.25a.75.75 0 01.75.75v1.233a8.91 8.91 0 013.43.92c.388.13.628.514.628.927v1.438c0 .413-.24.797-.628.927a8.91 8.91 0 01-3.43.92v1.233a.75.75 0 01-1.5 0v-1.233a8.91 8.91 0 01-3.43-.92c-.388-.13-.628-.514-.628-.927V7.088c0-.413.24-.797.628-.927a8.91 8.91 0 013.43-.92V3a.75.75 0 01.75-.75zM10.88 7.398a7.41 7.41 0 002.25 0V9.6a7.41 7.41 0 00-2.25 0V7.398zM12 12.75a.75.75 0 01.75.75v1.233a8.91 8.91 0 013.43.92c.388.13.628.514.628.927v1.438c0 .413-.24.797-.628.927a8.91 8.91 0 01-3.43.92v1.233a.75.75 0 01-1.5 0v-1.233a8.91 8.91 0 01-3.43-.92c-.388-.13-.628-.514-.628-.927v-1.438c0-.413.24-.797.628-.927a8.91 8.91 0 013.43-.92v-1.233a.75.75 0 01.75-.75zm-1.13 5.898a7.41 7.41 0 002.25 0v2.202a7.41 7.41 0 00-2.25 0v-2.202z"/></svg>
+                    <svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.012 2.25a.75.75 0 01.75.75v1.233a8.91 8.91 0 013.43.92c.388.13.628.514.628.927v1.438c0 .413-.24.797-.628.927a8.91 8.91 0 01-3.43.92v1.233a.75.75 0 01-1.5 0v-1.233a8.91 8.91 0 01-3.43-.92c-.388-.13-.628-.514-.628-.927V7.088c0-.413.24-.797.628-.927a8.91 8.91 0 013.43-.92V3a.75.75 0 01.75-.75zM10.88 7.398a7.41 7.41 0 002.25 0V9.6a7.41 7.41 0 00-2.25 0V7.398zM12 12.75a.75.75 0 01.75.75v1.233a8.91 8.91 0 013.43.92c.388.13.628.514.628.927v1.438c0 .413-.24.797-.628.927a8.91 8.91 0 01-3.43.92v1.233a.75.75 0 01-1.5 0v-1.233a8.91 8.91 0 01-3.43-.92c-.388-.13-.628-.514-.628-.927v-1.438c0-.413.24-.797-.628-.927a8.91 8.91 0 013.43-.92v-1.233a.75.75 0 01.75-.75zm-1.13 5.898a7.41 7.41 0 002.25 0v2.202a7.41 7.41 0 00-2.25 0v-2.202z"/></svg>
                     <h3>Система тарифов</h3>
                     <p>Мы предлагаем гибкие тарифные планы, которые подойдут как начинающим партнерам, так и опытным лидерам структур. Выберите то, что подходит именно вам.</p>
                 </div>
