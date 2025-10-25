@@ -95,7 +95,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 60px;
+            height: 70px; /* Увеличили высоту шапки */
             z-index: 1000;
             
             /* Эффект стекла */
@@ -125,8 +125,8 @@
         }
 
         .header-logo {
-            width: 40px;
-            height: 40px;
+            width: 45px; /* Увеличили размер логотипа */
+            height: 45px; /* Увеличили размер логотипа */
             background-color: var(--white-color);
             border-radius: 10px; /* Мягкий квадрат */
             display: flex;
@@ -135,7 +135,7 @@
             font-size: 18px;
             font-weight: bold;
             color: var(--primary-color);
-            margin-right: 10px;
+            margin-right: 12px; /* Увеличили отступ */
             flex-shrink: 0;
             overflow: hidden;
         }
@@ -147,7 +147,7 @@
         }
 
         .header-title {
-            font-size: 16px;
+            font-size: 18px; /* Увеличили размер текста */
             font-weight: 600;
             color: var(--primary-color);
         }
@@ -158,10 +158,11 @@
             overflow-x: auto;
             -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
             scrollbar-width: none; /* Скрыть скроллбар в Firefox */
-            margin-left: 15px;
+            margin-left: 20px; /* Увеличили отступ */
             height: 100%;
             display: flex;
             align-items: center;
+            padding: 10px 0; /* Добавили вертикальный отступ */
         }
 
         .nav-scroll-container::-webkit-scrollbar {
@@ -173,20 +174,24 @@
             display: flex;
             list-style: none;
             white-space: nowrap;
-            padding: 5px 0;
+            padding: 0;
+            gap: 12px; /* Использовали gap для отступов между кнопками */
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--primary-color);
             font-weight: 500;
-            font-size: 14px;
-            padding: 10px 16px; /* Увеличили отступы */
-            margin-left: 8px; /* Увеличили отступ между кнопками */
-            border-radius: 8px;
+            font-size: 15px; /* Увеличили размер шрифта */
+            padding: 12px 20px; /* Значительно увеличили отступы */
+            border-radius: 10px; /* Увеличили скругление */
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px; /* Минимальная высота для удобного нажатия */
         }
         
         /* Анимация и эффект стекла для кнопок */
@@ -220,7 +225,7 @@
 
         /* --- ОСНОВНОЕ СОДЕРЖИМОЕ (MAIN) --- */
         main {
-            padding: 80px 15px 20px; /* Добавлен отступ сверху для фиксированного хедера */
+            padding: 90px 15px 20px; /* Увеличили отступ сверху из-за большей высоты шапки */
         }
 
         .contact-section {
@@ -246,14 +251,14 @@
         .contact-cards {
             display: flex;
             flex-direction: column;
-            gap: 25px; /* Увеличили отступ между карточками */
+            gap: 30px; /* Увеличили отступ между карточками */
             margin-top: 40px;
         }
 
         .contact-card {
             background-color: var(--white-color);
             border-radius: 15px;
-            padding: 25px;
+            padding: 30px; /* Увеличили внутренние отступы */
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -265,14 +270,14 @@
         }
 
         .contact-icon {
-            width: 50px;
-            height: 50px;
-            margin: 0 auto 15px auto;
+            width: 60px; /* Увеличили размер иконок */
+            height: 60px; /* Увеличили размер иконок */
+            margin: 0 auto 20px auto; /* Увеличили отступ */
             fill: var(--accent-color);
         }
 
         .contact-card h3 {
-            font-size: 20px;
+            font-size: 22px; /* Увеличили размер заголовка */
             color: var(--primary-color);
             margin-bottom: 15px;
         }
@@ -280,14 +285,14 @@
         .contact-card p {
             font-size: 16px;
             color: #666;
-            margin-bottom: 20px;
+            margin-bottom: 25px; /* Увеличили отступ */
             font-weight: 500;
         }
 
         .contact-button {
             display: inline-block;
-            padding: 12px 25px;
-            font-size: 16px;
+            padding: 16px 30px; /* Значительно увеличили отступы */
+            font-size: 18px; /* Увеличили размер шрифта */
             font-weight: 600;
             color: var(--white-color);
             background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
@@ -296,6 +301,10 @@
             text-decoration: none;
             box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
             transition: all 0.3s ease;
+            min-height: 56px; /* Минимальная высота для удобного нажатия */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .contact-button:hover {
@@ -306,7 +315,7 @@
         .notice-box {
             background-color: rgba(74, 0, 224, 0.1);
             border-left: 4px solid var(--primary-color);
-            padding: 15px 20px;
+            padding: 20px 25px; /* Увеличили отступы */
             border-radius: 8px;
             margin: 30px 0;
             text-align: left;
@@ -316,26 +325,28 @@
             margin: 0;
             color: var(--primary-color);
             font-weight: 500;
+            font-size: 16px; /* Увеличили размер шрифта */
         }
 
         .contact-info {
             text-align: left;
             background-color: var(--white-color);
             border-radius: 15px;
-            padding: 25px;
+            padding: 30px; /* Увеличили отступы */
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             margin: 30px 0;
         }
 
         .contact-info h3 {
             color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 20px;
+            margin-bottom: 20px; /* Увеличили отступ */
+            font-size: 22px; /* Увеличили размер шрифта */
         }
 
         .contact-info p {
-            margin-bottom: 10px;
+            margin-bottom: 15px; /* Увеличили отступ */
             color: #555;
+            font-size: 16px; /* Увеличили размер шрифта */
         }
 
         .contact-info strong {
@@ -347,7 +358,7 @@
         @media (min-width: 768px) {
             .nav-links a {
                 font-size: 16px;
-                padding: 12px 18px; /* Увеличили отступы для планшетов */
+                padding: 14px 22px; /* Увеличили отступы для планшетов */
             }
             .header-title {
                 font-size: 20px;
@@ -355,7 +366,7 @@
             .contact-cards {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                gap: 30px; /* Увеличили отступы для планшетов */
+                gap: 35px; /* Увеличили отступы для планшетов */
             }
         }
 
