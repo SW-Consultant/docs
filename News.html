@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Мета-теги -->
+    <title>SW Consultant - Новости</title>
+    <meta name="description" content="Последние новости и обновления от SW Consultant. Будьте в курсе всех событий и нововведений!">
+    <meta name="keywords" content="SW Consultant, новости, обновления, события, нововведения">
+
+    <style>
+        /* --- ОБЩИЕ СТИЛИ И ПЕРЕМЕННЫЕ --- */
+        :root {
+            --primary-color: #4a00e0; /* Фиолетовый */
+            --secondary-color: #8e2de2; /* Сиреневый */
+            --accent-color: #00c6ff; /* Голубой */
+            --bg-color: #f4f7f9; /* Очень светло-серый фон */
+            --text-color: #333; /* Темно-серый текст */
+            --white-color: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden; /* Предотвращение горизонтальной прокрутки */
+        }
+
+        /* --- ЗАСТАВКА (SPLASH SCREEN) --- */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .splash-logo {
+            width: 120px;
+            height: 120px;
+            background-color: var(--white-color);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .splash-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .splash-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--white-color);
+        }
+
+        /* --- ШАПКА САЙТА (HEADER) --- */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px; /* Увеличили высоту шапки */
+            z-index: 1000;
+            
+            /* Эффект стекла */
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Для Safari */
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 0 15px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            flex-shrink: 0;
+        }
+
+        .header-logo {
+            width: 45px; /* Увеличили размер логотипа */
+            height: 45px; /* Увеличили размер логотипа */
+            background-color: var(--white-color);
+            border-radius: 10px; /* Мягкий квадрат */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-right: 12px; /* Увеличили отступ */
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .header-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .header-title {
+            font-size: 18px; /* Увеличили размер текста */
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        /* Контейнер для горизонтальной прокрутки навигации */
+        .nav-scroll-container {
+            flex-grow: 1;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+            scrollbar-width: none; /* Скрыть скроллбар в Firefox */
+            margin-left: 20px; /* Увеличили отступ */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 10px 0; /* Добавили вертикальный отступ */
+        }
+
+        .nav-scroll-container::-webkit-scrollbar {
+            display: none; /* Скрыть скроллбар в Chrome, Safari, Edge */
+        }
+
+        /* Стили для кнопок навигации */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            white-space: nowrap;
+            padding: 0;
+            gap: 12px; /* Использовали gap для отступов между кнопками */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 15px; /* Увеличили размер шрифта */
+            padding: 12px 20px; /* Значительно увеличили отступы */
+            border-radius: 10px; /* Увеличили скругление */
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px; /* Минимальная высота для удобного нажатия */
+        }
+        
+        /* Анимация и эффект стекла для кнопок */
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        /* Выделение активной страницы */
+        .nav-links a.active {
+            background: var(--primary-color);
+            color: var(--white-color);
+            box-shadow: 0 2px 5px rgba(74, 0, 224, 0.3);
+        }
+
+        /* --- ОСНОВНОЕ СОДЕРЖИМОЕ (MAIN) --- */
+        main {
+            padding: 90px 15px 20px; /* Увеличили отступ сверху из-за большей высоты шапки */
+        }
+
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .content-section h1 {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .content-section p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .content-card {
+            background-color: var(--white-color);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-date {
+            font-size: 14px;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .card-title {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .card-content {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .card-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white-color);
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .card-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(142, 45, 226, 0.4);
+        }
+
+        .notice-box {
+            background-color: rgba(74, 0, 224, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .notice-box p {
+            margin: 0;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        /* --- Адаптивность --- */
+        /* Стили для экранов шире мобильных (например, планшеты) */
+        @media (min-width: 768px) {
+            .nav-links a {
+                font-size: 16px;
+                padding: 14px 22px; /* Увеличили отступы для планшетов */
+            }
+            .header-title {
+                font-size: 20px;
+            }
+            .cards-container {
+                gap: 30px; /* Увеличили отступы для планшетов */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Заставка (Splash Screen) -->
+    <div id="splash-screen">
+        <div class="splash-logo">
+            <img src="logo.png" alt="SW Consultant Logo">
+        </div>
+        <h1 class="splash-title">SW Consultant</h1>
+    </div>
+
+    <!-- Шапка сайта -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="https://sw-consultant.github.io/docs/Home.html" class="logo-container">
+                <div class="header-logo">
+                    <img src="logo.png" alt="SW Logo">
+                </div>
+                <span class="header-title">SW Consultant</span>
+            </a>
+            <div class="nav-scroll-container">
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="https://sw-consultant.github.io/docs/Home.html">Главная</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Documentation.html">Документация</a></li>
+                        <li><a href="news.html" class="active">Новости</a></li>
+                        <li><a href="promotions.html">Акции</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="#">Соцсети</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое страницы -->
+    <main>
+        <!-- Секция с новостями -->
+        <section class="content-section">
+            <h1>Новости и обновления</h1>
+            
+            <p>В этом разделе мы публикуем все последние новости и обновления, связанные с работой нашего бота. Будьте в курсе всех нововведений и улучшений функционала!</p>
+            
+            <div class="notice-box">
+                <p>Подписывайтесь на наши уведомления в боте, чтобы первыми узнавать о важных обновлениях!</p>
+            </div>
+            
+            <div class="cards-container">
+                <!-- Карточка 1 -->
+                <div class="content-card">
+                    <div class="card-date">18 октября 2023</div>
+                    <h3 class="card-title">Обновление ИИ-ассистента: версия 2.0</h3>
+                    <p class="card-content">Мы рады представить вам обновленную версию нашего ИИ-ассистента! Новый алгоритм обучения позволяет боту давать более точные и релевантные ответы на ваши вопросы. Также улучшена скорость обработки запросов.</p>
+                    <a href="#" class="card-button">Подробнее об обновлении</a>
+                </div>
+
+                <!-- Карточка 2 -->
+                <div class="content-card">
+                    <div class="card-date">5 октября 2023</div>
+                    <h3 class="card-title">Новый функционал: аналитика продаж</h3>
+                    <p class="card-content">Добавлен новый раздел с аналитикой продаж! Теперь вы можете отслеживать эффективность своей работы, видеть статистику по продажам и получать рекомендации по улучшению результатов.</p>
+                    <a href="#" class="card-button">Как использовать</a>
+                </div>
+
+                <!-- Карточка 3 -->
+                <div class="content-card">
+                    <div class="card-date">20 сентября 2023</div>
+                    <h3 class="card-title">Интеграция с CRM-системами</h3>
+                    <p class="card-content">Мы добавили возможность интеграции нашего бота с популярными CRM-системами. Теперь вы можете автоматически синхронизировать данные о клиентах и сделках между ботом и вашей CRM.</p>
+                    <a href="#" class="card-button">Список поддерживаемых CRM</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Скрипт для скрытия заставки
+        window.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.getElementById('splash-screen');
+
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+            }, 2000); // 2000 миллисекунд = 2 секунды
+        });
+    </script>
+
+</body>
+</html>
