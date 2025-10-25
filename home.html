@@ -72,10 +72,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 48px;
-            font-weight: bold;
-            color: var(--primary-color);
             margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .splash-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
         }
 
         .splash-title {
@@ -86,11 +90,11 @@
 
         /* --- ШАПКА САЙТА (HEADER) --- */
         .site-header {
-            position: sticky;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 10px 15px;
+            height: 60px;
             z-index: 1000;
             
             /* Эффект стекла */
@@ -98,6 +102,8 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px); /* Для Safari */
             border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
         }
         
         .nav-container {
@@ -105,6 +111,8 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
+            height: 100%;
+            padding: 0 15px;
         }
 
         .logo-container {
@@ -112,6 +120,7 @@
             align-items: center;
             text-decoration: none;
             color: var(--text-color);
+            flex-shrink: 0;
         }
 
         .header-logo {
@@ -135,10 +144,28 @@
             color: var(--primary-color);
         }
         
+        /* Контейнер для горизонтальной прокрутки навигации */
+        .nav-scroll-container {
+            flex-grow: 1;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+            scrollbar-width: none; /* Скрыть скроллбар в Firefox */
+            margin-left: 15px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-scroll-container::-webkit-scrollbar {
+            display: none; /* Скрыть скроллбар в Chrome, Safari, Edge */
+        }
+
         /* Стили для кнопок навигации */
         .nav-links {
             display: flex;
             list-style: none;
+            white-space: nowrap;
+            padding: 5px 0;
         }
 
         .nav-links a {
@@ -185,7 +212,7 @@
 
         /* --- ОСНОВНОЕ СОДЕРЖИМОЕ (MAIN) --- */
         main {
-            padding: 20px 15px;
+            padding: 80px 15px 20px; /* Добавлен отступ сверху для фиксированного хедера */
         }
 
         .hero-section {
@@ -218,11 +245,16 @@
             color: var(--secondary-color);
         }
 
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
         .feature-card {
             background-color: var(--white-color);
             border-radius: 15px;
             padding: 25px;
-            margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -300,7 +332,9 @@
 
     <!-- Заставка (Splash Screen) -->
     <div id="splash-screen">
-        <div class="splash-logo">SW</div>
+        <div class="splash-logo">
+            <img src="file_00000000b29c620aba84fd4b1f9ae118 (2).png" alt="SW Consultant Logo">
+        </div>
         <h1 class="splash-title">SW Consultant</h1>
     </div>
 
@@ -311,22 +345,24 @@
                 <div class="header-logo">SW</div>
                 <span class="header-title">SW Consultant</span>
             </a>
-            <nav>
-                <!-- 
-                    ВАЖНО: Для других страниц (Новости, Акции и т.д.) вам нужно будет создать
-                    новые HTML-файлы (например, news.html, promotions.html).
-                    В каждом файле нужно будет поменять класс 'active' на соответствующую ссылку.
-                    Например, на странице "Новости" класс 'active' будет у ссылки "Новости".
-                -->
-                <ul class="nav-links">
-                    <li><a href="index.html" class="active">Главная</a></li>
-                    <li><a href="#">Новости</a></li>
-                    <li><a href="#">Акции</a></li>
-                    <li><a href="#">Соцсети</a></li>
-                    <li><a href="#">Контакты</a></li>
-                    <li><a href="#">Документация</a></li>
-                </ul>
-            </nav>
+            <div class="nav-scroll-container">
+                <nav>
+                    <!-- 
+                        ВАЖНО: Для других страниц (Новости, Акции и т.д.) вам нужно будет создать
+                        новые HTML-файлы (например, news.html, promotions.html).
+                        В каждом файле нужно будет поменять класс 'active' на соответствующую ссылку.
+                        Например, на странице "Новости" класс 'active' будет у ссылки "Новости".
+                    -->
+                    <ul class="nav-links">
+                        <li><a href="index.html" class="active">Главная</a></li>
+                        <li><a href="#">Новости</a></li>
+                        <li><a href="#">Акции</a></li>
+                        <li><a href="#">Соцсети</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Документация</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </header>
 
