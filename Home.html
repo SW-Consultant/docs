@@ -1,562 +1,547 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SW-Consultant - AI-Driven Project Management</title>
-    <link rel="icon" type="image/png" href="sw-logo.png">
-    
-    <style>
-        /* --- ОБЩИЕ СТИЛИ И ПЕРЕМЕННЫЕ --- */
-        :root {
-            --primary-color: #4a00e0; /* Фиолетовый */
-            --secondary-color: #8e2de2; /* Сиреневый */
-            --accent-color: #00c6ff; /* Голубой */
-            --bg-color: #f4f7f9; /* Очень светло-серый фон */
-            --text-color: #333; /* Темно-серый текст */
-            --white-color: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Мета-теги -->
+    <title>SW Consultant - интеллектуальный телеграм бот для бизнес-партнеров Siberian Wellness</title>
+    <meta name="description" content="SW Consultant - инновационный телеграм-бот с искусственным интеллектом для автоматизации работы бизнес-партнеров Siberian Wellness. Увеличьте эффективность вашего бизнеса с нашим умным помощником.">
+    <meta name="keywords" content="SW Consultant, телеграм бот, Siberian Wellness, бизнес-партнеры, искусственный интеллект, автоматизация бизнеса, бот для продаж, консультант для партнеров">
+    
+    <!-- Подтверждение сайта в Google Search Console -->
+    <meta name="google-site-verification" content="xlZLXMY0oAFizCnEUHPguxzK7XkPFYilJHqMVPsDYxs" />
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <!-- Open Graph мета-теги для социальных сетей -->
+    <meta property="og:title" content="SW Consultant - интеллектуальный телеграм бот для бизнес-партнеров">
+    <meta property="og:description" content="Инновационный телеграм-бот с ИИ для автоматизации работы бизнес-партнеров Siberian Wellness">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sw-consultant.github.io/docs/Home.html">
+    <meta property="og:image" content="https://sw-consultant.github.io/logo.png">
 
-        html {
-            scroll-behavior: smooth;
-        }
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SW Consultant - интеллектуальный телеграм бот для бизнес-партнеров">
+    <meta name="twitter:description" content="Инновационный телеграм-бот с ИИ для автоматизации работы бизнес-партнеров Siberian Wellness">
+    <meta name="twitter:image" content="https://sw-consultant.github.io/logo.png">
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden; /* Предотвращение горизонтальной прокрутки */
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    <!-- Дополнительные мета-теги -->
+    <meta name="author" content="SW Consultant">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://sw-consultant.github.io/docs/Home.html">
 
-        /* --- ЗАСТАВКА (SPLASH SCREEN) --- */
-        #splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
-            opacity: 1;
-            visibility: visible;
-        }
+    <!-- Структурированные данные -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "SW Consultant",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Telegram",
+      "description": "Интеллектуальный телеграм-бот с искусственным интеллектом для бизнес-партнеров Siberian Wellness",
+      "url": "https://sw-consultant.github.io/docs/Home.html",
+      "applicationSubCategory": "Chatbot",
+      "featureList": [
+        "Встроенный искусственный интеллект",
+        "Большая база данных продукции",
+        "Легкость в использовании",
+        "Гибкая система тарифов",
+        "Эксклюзивные акции",
+        "Розыгрыши призов"
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "SW Consultant",
+        "url": "https://sw-consultant.github.io/docs/Home.html"
+      },
+      "downloadUrl": "https://t.me/SWConsultant_Bot",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RUB"
+      }
+    }
+    </script>
 
-        #splash-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
+    <!-- Остальные стили остаются без изменений -->
+    <style>
+        /* --- ОБЩИЕ СТИЛИ И ПЕРЕМЕННЫЕ --- */
+        :root {
+            --primary-color: #4a00e0; /* Фиолетовый */
+            --secondary-color: #8e2de2; /* Сиреневый */
+            --accent-color: #00c6ff; /* Голубой */
+            --bg-color: #f4f7f9; /* Очень светло-серый фон */
+            --text-color: #333; /* Темно-серый текст */
+            --white-color: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
 
-        .splash-logo {
-            width: 120px;
-            height: 120px;
-            background-color: var(--white-color);
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        .splash-logo img {
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-        }
+        html {
+            scroll-behavior: smooth;
+        }
 
-        .splash-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--white-color);
-        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden; /* Предотвращение горизонтальной прокрутки */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-        /* --- ШАПКА САЙТА (HEADER) --- */
-        .site-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 70px; /* Увеличили высоту шапки */
-            z-index: 1000;
-            
-            /* Эффект стекла */
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* Для Safari */
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            padding: 0 15px;
-        }
+        /* --- ЗАСТАВКА (SPLASH SCREEN) --- */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+            opacity: 1;
+            visibility: visible;
+        }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-color);
-            flex-shrink: 0;
-        }
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
 
-        .header-logo {
-            width: 45px; /* Увеличили размер логотипа */
-            height: 45px; /* Увеличили размер логотипа */
-            background-color: var(--white-color);
-            border-radius: 10px; /* Мягкий квадрат */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-right: 12px; /* Увеличили отступ */
-            flex-shrink: 0;
-            overflow: hidden;
-        }
+        .splash-logo {
+            width: 120px;
+            height: 120px;
+            background-color: var(--white-color);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
 
-        .header-logo img {
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-        }
+        .splash-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
 
-        .header-title {
-            font-size: 18px; /* Увеличили размер текста */
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-        
-        /* Контейнер для горизонтальной прокрутки навигации */
-        .nav-scroll-container {
-            flex-grow: 1;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
-            scrollbar-width: none; /* Скрыть скроллбар в Firefox */
-            margin-left: 20px; /* Увеличили отступ */
-            height: 100%;
-            display: flex;
-            align-items: center;
-            padding: 10px 0; /* Добавили вертикальный отступ */
-        }
+        .splash-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--white-color);
+        }
 
-        .nav-scroll-container::-webkit-scrollbar {
-            display: none; /* Скрыть скроллбар в Chrome, Safari, Edge */
-        }
+        /* --- ШАПКА САЙТА (HEADER) --- */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px; /* Увеличили высоту шапки */
+            z-index: 1000;
+            
+            /* Эффект стекла */
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Для Safari */
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 0 15px;
+        }
 
-        /* Стили для кнопок навигации */
-        .nav-links {
-            display: flex;
-            list-style: none;
-            white-space: nowrap;
-            padding: 0;
-            gap: 12px; /* Использовали gap для отступов между кнопками */
-        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            flex-shrink: 0;
+        }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: 500;
-            font-size: 15px; /* Увеличили размер шрифта */
-            padding: 12px 20px; /* Значительно увеличили отступы */
-            border-radius: 10px; /* Увеличили скругление */
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 44px; /* Минимальная высота для удобного нажатия */
-        }
-        
-        /* Анимация и эффект стекла для кнопок */
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: left 0.4s ease;
-        }
+        .header-logo {
+            width: 45px; /* Увеличили размер логотипа */
+            height: 45px; /* Увеличили размер логотипа */
+            background-color: var(--white-color);
+            border-radius: 10px; /* Мягкий квадрат */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-right: 12px; /* Увеличили отступ */
+            flex-shrink: 0;
+            overflow: hidden;
+        }
 
-        .nav-links a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-links a:hover::before {
-            left: 100%;
-        }
+        .header-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
 
-        /* Выделение активной страницы */
-        .nav-links a.active {
-            background: var(--primary-color);
-            color: var(--white-color);
-            box-shadow: 0 2px 5px rgba(74, 0, 224, 0.3);
-        }
+        .header-title {
+            font-size: 18px; /* Увеличили размер текста */
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        /* Контейнер для горизонтальной прокрутки навигации */
+        .nav-scroll-container {
+            flex-grow: 1;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+            scrollbar-width: none; /* Скрыть скроллбар в Firefox */
+            margin-left: 20px; /* Увеличили отступ */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 10px 0; /* Добавили вертикальный отступ */
+        }
 
-        /* --- ОСНОВНОЕ СОДЕРЖИМОЕ (MAIN) --- */
-        main {
-            padding: 90px 15px 20px; /* Увеличили отступ сверху из-за большей высоты шапки */
-            flex: 1;
-        }
+        .nav-scroll-container::-webkit-scrollbar {
+            display: none; /* Скрыть скроллбар в Chrome, Safari, Edge */
+        }
 
-        .hero-section {
-            text-align: center;
-            padding: 40px 0;
-        }
+        /* Стили для кнопок навигации */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            white-space: nowrap;
+            padding: 0;
+            gap: 12px; /* Использовали gap для отступов между кнопками */
+        }
 
-        .hero-section h1 {
-            font-size: 28px;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 15px; /* Увеличили размер шрифта */
+            padding: 12px 20px; /* Значительно увеличили отступы */
+            border-radius: 10px; /* Увеличили скругление */
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px; /* Минимальная высота для удобного нажатия */
+        }
+        
+        /* Анимация и эффект стекла для кнопок */
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.4s ease;
+        }
 
-        .hero-section p {
-            font-size: 16px;
-            max-width: 600px;
-            margin: 0 auto;
-            color: #555;
-        }
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-links a:hover::before {
+            left: 100%;
+        }
 
-        /* --- Раздел с преимуществами --- */
-        .features-section {
-            padding: 40px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 30px;
-            color: var(--secondary-color);
-        }
+        /* Выделение активной страницы */
+        .nav-links a.active {
+            background: var(--primary-color);
+            color: var(--white-color);
+            box-shadow: 0 2px 5px rgba(74, 0, 224, 0.3);
+        }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
+        /* --- ОСНОВНОЕ СОДЕРЖИМОЕ (MAIN) --- */
+        main {
+            padding: 90px 15px 20px; /* Увеличили отступ сверху из-за большей высоты шапки */
+            flex: 1;
+        }
 
-        .feature-card {
-            background-color: var(--white-color);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            /* Добавили курсор для интерактивности */
-            cursor: pointer;
-        }
+        .hero-section {
+            text-align: center;
+            padding: 40px 0;
+        }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-icon {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 15px auto;
-        }
-        
-        .feature-card h3 {
-            font-size: 20px;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
+        .hero-section h1 {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
 
-        .feature-card p {
-            font-size: 15px;
-        }
-        
-        /* --- Стили для Аккордеона (Дополнительная информация) --- */
-        .feature-details-container {
-            max-height: 0; /* Изначально скрываем контент */
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out, margin-top 0.5s ease-in-out; /* Плавный переход */
-            margin-top: 0;
-            text-align: left; /* Выравнивание текста внутри подробностей */
-            padding-top: 0;
-        }
-        
-        /* Класс 'active' для открытого состояния */
-        .feature-card.active .feature-details-container {
-            max-height: 300px; /* Достаточно большое значение для открытия */
-            margin-top: 15px; /* Отступ сверху при открытии */
-            padding-top: 15px;
-            border-top: 1px solid #eee; /* Визуальный разделитель */
-        }
+        .hero-section p {
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #555;
+        }
 
-        .feature-details p {
-            font-size: 14px;
-            color: #666;
-            margin-top: 10px;
-            line-height: 1.5;
-        }
+        /* --- Раздел с преимуществами --- */
+        .features-section {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+        }
 
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
 
-        /* --- Текст перед кнопкой --- */
-        .info-section {
-            text-align: center;
-            padding: 20px 0;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        .feature-card {
+            background-color: var(--white-color);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-        .info-section p {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 20px;
-        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 15px auto;
+        }
+        
+        .feature-card h3 {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
 
-        .info-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+        .feature-card p {
+            font-size: 15px;
+        }
+        
+        /* --- Текст перед кнопкой --- */
+        .info-section {
+            text-align: center;
+            padding: 20px 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-        .info-link:hover {
-            text-decoration: underline;
-        }
-        
-        /* --- Кнопка "Открыть бота" --- */
-        .cta-section {
-            padding: 20px 0;
-            text-align: center;
-        }
+        .info-section p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
 
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--white-color);
-            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
-            border: none;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
-            transition: all 0.3s ease;
-        }
+        .info-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
 
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(142, 45, 226, 0.6);
-        }
+        .info-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* --- Кнопка "Открыть бота" --- */
+        .cta-section {
+            padding: 20px 0;
+            text-align: center;
+        }
 
-        /* --- ФУТЕР --- */
-        footer {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-            text-align: center;
-            padding: 20px 15px;
-            font-size: 14px;
-        }
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--white-color);
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
+            transition: all 0.3s ease;
+        }
 
-        /* --- Адаптивность --- */
-        /* Стили для экранов шире мобильных (например, планшеты) */
-        @media (min-width: 768px) {
-            .nav-links a {
-                font-size: 16px;
-                padding: 14px 22px; /* Увеличили отступы для планшетов */
-            }
-            .header-title {
-                font-size: 20px;
-            }
-            .features-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 20px;
-            }
-            .feature-card {
-                margin-bottom: 0;
-            }
-        }
-    </style>
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(142, 45, 226, 0.6);
+        }
+
+        /* --- ФУТЕР --- */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-align: center;
+            padding: 20px 15px;
+            font-size: 14px;
+        }
+
+        /* --- Адаптивность --- */
+        /* Стили для экранов шире мобильных (например, планшеты) */
+        @media (min-width: 768px) {
+            .nav-links a {
+                font-size: 16px;
+                padding: 14px 22px; /* Увеличили отступы для планшетов */
+            }
+            .header-title {
+                font-size: 20px;
+            }
+            .features-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            .feature-card {
+                margin-bottom: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <div id="splash-screen">
-        <div class="splash-logo">
-            <img src="sw-logo.png" alt="SW-Consultant Logo">
-        </div>
-        <div class="splash-title">SW-Consultant</div>
-    </div>
+    <!-- Заставка (Splash Screen) -->
+    <div id="splash-screen">
+        <div class="splash-logo">
+            <img src="logo.png" alt="SW Consultant Logo">
+        </div>
+        <h1 class="splash-title">SW Consultant</h1>
+    </div>
 
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="#hero" class="logo-container">
-                <div class="header-logo">
-                    <img src="sw-logo.png" alt="SW Logo">
-                </div>
-                <span class="header-title">SW-Consultant</span>
-            </a>
-            
-            <nav class="nav-scroll-container">
-                <ul class="nav-links">
-                    <li><a href="#hero" class="active">Главная</a></li>
-                    <li><a href="#features">Возможности</a></li>
-                    <li><a href="#about">О нас</a></li>
-                    <li><a href="#contact">Связаться</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <!-- Шапка сайта -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="https://sw-consultant.github.io/docs/Home.html" class="logo-container">
+                <div class="header-logo">
+                    <img src="logo.png" alt="SW Logo">
+                </div>
+                <span class="header-title">SW Consultant</span>
+            </a>
+            <div class="nav-scroll-container">
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="https://sw-consultant.github.io/docs/Home.html" class="active">Главная</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/News.html">Новости</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Promotions.html">Акции</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Contacts.html">Контакты</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Documentation.html">Документация</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/social.html">Соцсети</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-    <main>
-        <section id="hero" class="hero-section">
-            <h1>Управляйте проектами с помощью ИИ</h1>
-            <p>SW-Consultant — это ваш персональный помощник в управлении проектами, использующий передовые AI-алгоритмы для повышения эффективности и принятия решений.</p>
-        </section>
-        
-        <section id="features" class="features-section">
-            <h2 class="section-title">Наши ключевые возможности</h2>
-            
-            <div class="features-grid">
-                
-                <div class="feature-card" onclick="toggleDetails(this)">
-                    <img src="ai_brain.png" alt="AI Brain Icon" class="feature-icon">
-                    <h3>AI-Аналитика и Прогнозирование</h3>
-                    <p>Искусственный интеллект анализирует ход проекта, выявляет риски и прогнозирует сроки завершения с высокой точностью.</p>
-                    
-                    <div class="feature-details-container">
-                        <div class="feature-details">
-                            <p><strong>Детали:</strong> Наша модель обучается на данных сотен проектов, что позволяет ей находить неочевидные закономерности и предупреждать вас о потенциальных срывах сроков задолго до того, как они станут критическими.</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- Основное содержимое страницы -->
+    <main>
+    <section class="hero-section">
+        <h1>SW Consultant - интеллектуальный помощник для бизнес-партнеров</h1>
+        <p>SW Consultant - это инновационный <strong>телеграм-бот с искусственным интеллектом</strong>, разработанный специально для <strong>бизнес-партнеров Siberian Wellness</strong>. Наш инструмент помогает автоматизировать рутинные задачи, увеличивает эффективность продаж и упрощает взаимодействие с клиентами.</p>
+    </section>
 
-                <div class="feature-card" onclick="toggleDetails(this)">
-                    <img src="database.png" alt="Database Icon" class="feature-icon">
-                    <h3>Централизованная База Знаний</h3>
-                    <p>Собирайте и структурируйте всю документацию, обсуждения и лучшие практики в одном легкодоступном месте.</p>
-                    
-                    <div class="feature-details-container">
-                        <div class="feature-details">
-                            <p><strong>Детали:</strong> Все документы, отчеты и протоколы автоматически индексируются и становятся доступны для поиска, позволяя новым членам команды быстро погрузиться в проект, а опытным - находить нужные данные мгновенно.</p>
-                        </div>
-                    </div>
-                </div>
+    <section class="features-section">
+        <h2 class="section-title">Особенности нашего инструмента</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <img src="ai_brain.png" alt="Встроенный ИИ" class="feature-icon">
+                <h3>Встроенный ИИ</h3>
+                <p>Наш бот оснащен передовым искусственным интеллектом, который помогает отвечать на вопросы клиентов, подбирать продукцию и предоставлять консультации 24/7.</p>
+            </div>
 
-                <div class="feature-card" onclick="toggleDetails(this)">
-                    <img src="task_list.png" alt="Task List Icon" class="feature-icon">
-                    <h3>Интеллектуальное Управление Задачами</h3>
-                    <p>Автоматическое распределение задач и приоритетов на основе загрузки команды и критичности этапов проекта.</p>
-                    
-                    <div class="feature-details-container">
-                        <div class="feature-details">
-                            <p><strong>Детали:</strong> Наш ИИ не просто назначает задачи, он оптимизирует рабочие процессы, предлагая идеальное время для выполнения, чтобы избежать перегрузок и бутылочных горлышек.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="feature-card" onclick="toggleDetails(this)">
-                    <img src="timer.png" alt="Timer Icon" class="feature-icon">
-                    <h3>Точный Мониторинг Времени</h3>
-                    <p>Отслеживание времени, затраченного на задачи, с автоматическим созданием подробных отчетов для клиентов и бухгалтерии.</p>
-                    
-                    <div class="feature-details-container">
-                        <div class="feature-details">
-                            <p><strong>Детали:</strong> Встроенный тайм-трекер обеспечивает прозрачность и точность. Вы всегда будете знать, куда уходят рабочие часы, и сможете оптимизировать будущие оценки проектов.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-card">
+                <img src="database.png" alt="Большая база данных" class="feature-icon">
+                <h3>Большая база данных</h3>
+                <p>Полный каталог продукции Siberian Wellness, обучающие материалы, скрипты продаж и ответы на часто задаваемые вопросы всегда под рукой в удобном формате.</p>
+            </div>
 
-            </div>
-        </section>
+            <div class="feature-card">
+                <img src="easy_use.png" alt="Легкость в использовании" class="feature-icon">
+                <h3>Легкость в использовании</h3>
+                <p>Интуитивно понятный интерфейс в привычном приложении Telegram. Начать работу с ботом можно всего за несколько кликов, без сложной настройки и обучения.</p>
+            </div>
 
-        <section id="about" class="info-section">
-            <h2 class="section-title">О нас</h2>
-            <p>SW-Consultant был создан командой экспертов по управлению проектами и разработчиков искусственного интеллекта. Наша миссия — устранить хаос в работе, позволив командам сосредоточиться на создании ценности.</p>
-            <p>Начните трансформировать свои рабочие процессы сегодня!</p>
-        </section>
+            <div class="feature-card">
+                <img src="tariffs.png" alt="Система тарифов" class="feature-icon">
+                <h3>Система тарифов</h3>
+                <p>Мы предлагаем гибкие тарифные планы, которые подойдут как начинающим партнерам, так и опытным лидерам структур. Выберите то, что подходит именно вам.</p>
+            </div>
 
-        <section id="contact" class="cta-section">
-            <h2 class="section-title">Готовы начать?</h2>
-            <a href="URL_В_ТЕЛЕГРАММ_БОТА" class="cta-button">Открыть бота и начать</a>
-        </section>
+            <div class="feature-card">
+                <img src="sales_promo.png" alt="Акции" class="feature-icon">
+                <h3>Акции</h3>
+                <p>Пользователи нашего бота получают доступ к эксклюзивным акциям и специальным предложениям, которые помогут увеличить продажи и привлечь новых клиентов.</p>
+            </div>
 
-    </main>
+            <div class="feature-card">
+                <img src="rozigrishi.png" alt="Розыгрыши" class="feature-icon">
+                <h3>Розыгрыши</h3>
+                <p>Мы регулярно проводим розыгрыши ценных призов и бонусов среди активных пользователей бота, мотивируя их на достижение лучших результатов.</p>
+            </div>
+        </div>
+    </section>
+        <!-- Текст перед кнопкой -->
+        <section class="info-section">
+            <p>Перед началом использования ботом, пожалуйста, ознакомьтесь с <a href="https://sw-consultant.github.io/docs/Documentation.html" class="info-link">документацией</a>. Мы просим вас это сделать, чтобы обеспечить полное понимание всех возможностей и правил использования нашего инструмента, а также для защиты ваших прав и интересов как пользователя.</p>
+        </section>
 
-    <footer>
-        <p>&copy; 2025 SW-Consultant. Все права защищены. | Powered by AI</p>
-    </footer>
+        <!-- Секция с кнопкой -->
+        <section class="cta-section">
+            <a href="https://t.me/SWConsultant_Bot" target="_blank" class="cta-button">Открыть бота</a>
+        </section>
+    </main>
 
-    <script>
-        // Скрипт 1: Анимация заставки
-        window.addEventListener('load', () => {
-            const splash = document.getElementById('splash-screen');
-            setTimeout(() => {
-                splash.classList.add('hidden');
-            }, 1500); // Заставка исчезнет через 1.5 секунды
-        });
+    <!-- Футер -->
+    <footer>
+        <p>&copy; 2025 SW Consultant. Все права защищены.</p>
+    </footer>
 
-        // Скрипт 2: Функция Аккордеона
-        function toggleDetails(cardElement) {
-            // Переключаем класс 'active' на карточке
-            cardElement.classList.toggle('active');
-        }
+    <script>
+        // Скрипт для скрытия заставки
+        window.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.getElementById('splash-screen');
 
-        // Скрипт 3: Выделение активной ссылки в навигации
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-links a');
-            const sections = document.querySelectorAll('section');
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+            }, 500); // 2000 миллисекунд = 2 секунды
+        });
+    </script>
 
-            const options = {
-                root: null, // Относительно viewport
-                threshold: 0.3 // 30% секции должно быть видно
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Удаляем активный класс со всех ссылок
-                        navLinks.forEach(link => link.classList.remove('active'));
-                        
-                        // Добавляем активный класс к соответствующей ссылке
-                        const targetId = entry.target.id;
-                        const activeLink = document.querySelector(`.nav-links a[href="#${targetId}"]`);
-                        if (activeLink) {
-                            activeLink.classList.add('active');
-                        }
-                    }
-                });
-            }, options);
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-    </script>
 </body>
 </html>
