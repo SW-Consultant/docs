@@ -1,545 +1,519 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Мета-теги -->
-    <title>SW Consultant - интеллектуальный телеграм бот для бизнес-партнеров Siberian Wellness</title>
-    <meta name="description" content="SW Consultant - инновационный телеграм-бот с искусственным интеллектом для автоматизации работы бизнес-партнеров Siberian Wellness. Увеличьте эффективность вашего бизнеса с нашим умным помощником.">
-    <meta name="keywords" content="SW Consultant, телеграм бот, Siberian Wellness, бизнес-партнеры, искусственный интеллект, автоматизация бизнеса, бот для продаж, консультант для партнеров">
-    
-    <!-- Подтверждение сайта в Google Search Console -->
-    <meta name="google-site-verification" content="xlZLXMY0oAFizCnEUHPguxzK7XkPFYilJHqMVPsDYxs" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Мета-теги -->
+    <title>SW Consultant - Главная</title>
+    <meta name="description" content="Интеллектуальный телеграмм-бот с ИИ для бизнес-партнеров Siberian Wellness. Автоматизируйте свою работу и увеличьте эффективность.">
+    <meta name="keywords" content="SW Consultant, Siberian Wellness, телеграмм бот, ИИ, бизнес инструмент, автоматизация">
 
-    <!-- Open Graph мета-теги для социальных сетей -->
-    <meta property="og:title" content="SW Consultant - интеллектуальный телеграм бот для бизнес-партнеров">
-    <meta property="og:description" content="Инновационный телеграм-бот с ИИ для автоматизации работы бизнес-партнеров Siberian Wellness">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://sw-consultant.github.io/docs/Home.html">
-    <meta property="og:image" content="https://sw-consultant.github.io/logo.png">
+    <style>
+        /* --- ОБЩИЕ СТИЛИ И ПЕРЕМЕННЫЕ --- */
+        :root {
+            --primary-color: #4a00e0; /* Фиолетовый */
+            --secondary-color: #8e2de2; /* Сиреневый */
+            --accent-color: #00c6ff; /* Голубой */
+            --bg-color: #f4f7f9; /* Очень светло-серый фон */
+            --text-color: #333; /* Темно-серый текст */
+            --white-color: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SW Consultant - интеллектуальный телеграм бот для бизнес-партнеров">
-    <meta name="twitter:description" content="Инновационный телеграм-бот с ИИ для автоматизации работы бизнес-партнеров Siberian Wellness">
-    <meta name="twitter:image" content="https://sw-consultant.github.io/logo.png">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Дополнительные мета-теги -->
-    <meta name="author" content="SW Consultant">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://sw-consultant.github.io/docs/Home.html">
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <!-- Структурированные данные -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "SW Consultant",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Telegram",
-      "description": "Интеллектуальный телеграм-бот с искусственным интеллектом для бизнес-партнеров Siberian Wellness",
-      "url": "https://sw-consultant.github.io/docs/Home.html",
-      "applicationSubCategory": "Chatbot",
-      "featureList": [
-        "Встроенный искусственный интеллект",
-        "Большая база данных продукции",
-        "Легкость в использовании",
-        "Гибкая система тарифов",
-        "Эксклюзивные акции",
-        "Розыгрыши призов"
-      ],
-      "publisher": {
-        "@type": "Organization",
-        "name": "SW Consultant",
-        "url": "https://sw-consultant.github.io/docs/Home.html"
-      },
-      "downloadUrl": "https://t.me/SWConsultant_Bot",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "RUB"
-      }
-    }
-    </script>
-    <style>
-        /* --- ОБЩИЕ СТИЛИ И ПЕРЕМЕННЫЕ --- */
-        :root {
-            --primary-color: #4a00e0; /* Фиолетовый */
-            --secondary-color: #8e2de2; /* Сиреневый */
-            --accent-color: #00c6ff; /* Голубой */
-            --bg-color: #f4f7f9; /* Очень светло-серый фон */
-            --text-color: #333; /* Темно-серый текст */
-            --white-color: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden; /* Предотвращение горизонтальной прокрутки */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* --- ЗАСТАВКА (SPLASH SCREEN) --- */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+            opacity: 1;
+            visibility: visible;
+        }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden; /* Предотвращение горизонтальной прокрутки */
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+        .splash-logo {
+            width: 120px;
+            height: 120px;
+            background-color: var(--white-color);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
 
-        /* --- ЗАСТАВКА (SPLASH SCREEN) --- */
-        #splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
-            opacity: 1;
-            visibility: visible;
-        }
+        .splash-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
 
-        #splash-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
+        .splash-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--white-color);
+        }
 
-        .splash-logo {
-            width: 120px;
-            height: 120px;
-            background-color: var(--white-color);
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
+        /* --- ШАПКА САЙТА (HEADER) --- */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px; /* Увеличили высоту шапки */
+            z-index: 1000;
+            
+            /* Эффект стекла */
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Для Safari */
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 0 15px;
+        }
 
-        .splash-logo img {
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            flex-shrink: 0;
+        }
 
-        .splash-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--white-color);
-        }
+        .header-logo {
+            width: 45px; /* Увеличили размер логотипа */
+            height: 45px; /* Увеличили размер логотипа */
+            background-color: var(--white-color);
+            border-radius: 10px; /* Мягкий квадрат */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-right: 12px; /* Увеличили отступ */
+            flex-shrink: 0;
+            overflow: hidden;
+        }
 
-        /* --- ШАПКА САЙТА (HEADER) --- */
-        .site-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 70px; /* Увеличили высоту шапки */
-            z-index: 1000;
-            
-            /* Эффект стекла */
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* Для Safari */
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            padding: 0 15px;
-        }
+        .header-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-color);
-            flex-shrink: 0;
-        }
+        .header-title {
+            font-size: 18px; /* Увеличили размер текста */
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        /* Контейнер для горизонтальной прокрутки навигации */
+        .nav-scroll-container {
+            flex-grow: 1;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+            scrollbar-width: none; /* Скрыть скроллбар в Firefox */
+            margin-left: 20px; /* Увеличили отступ */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 10px 0; /* Добавили вертикальный отступ */
+        }
 
-        .header-logo {
-            width: 45px; /* Увеличили размер логотипа */
-            height: 45px; /* Увеличили размер логотипа */
-            background-color: var(--white-color);
-            border-radius: 10px; /* Мягкий квадрат */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-right: 12px; /* Увеличили отступ */
-            flex-shrink: 0;
-            overflow: hidden;
-        }
+        .nav-scroll-container::-webkit-scrollbar {
+            display: none; /* Скрыть скроллбар в Chrome, Safari, Edge */
+        }
 
-        .header-logo img {
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-        }
+        /* Стили для кнопок навигации */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            white-space: nowrap;
+            padding: 0;
+            gap: 12px; /* Использовали gap для отступов между кнопками */
+        }
 
-        .header-title {
-            font-size: 18px; /* Увеличили размер текста */
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-        
-        /* Контейнер для горизонтальной прокрутки навигации */
-        .nav-scroll-container {
-            flex-grow: 1;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
-            scrollbar-width: none; /* Скрыть скроллбар в Firefox */
-            margin-left: 20px; /* Увеличили отступ */
-            height: 100%;
-            display: flex;
-            align-items: center;
-            padding: 10px 0; /* Добавили вертикальный отступ */
-        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 15px; /* Увеличили размер шрифта */
+            padding: 12px 20px; /* Значительно увеличили отступы */
+            border-radius: 10px; /* Увеличили скругление */
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px; /* Минимальная высота для удобного нажатия */
+        }
+        
+        /* Анимация и эффект стекла для кнопок */
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.4s ease;
+        }
 
-        .nav-scroll-container::-webkit-scrollbar {
-            display: none; /* Скрыть скроллбар в Chrome, Safari, Edge */
-        }
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-links a:hover::before {
+            left: 100%;
+        }
 
-        /* Стили для кнопок навигации */
-        .nav-links {
-            display: flex;
-            list-style: none;
-            white-space: nowrap;
-            padding: 0;
-            gap: 12px; /* Использовали gap для отступов между кнопками */
-        }
+        /* Выделение активной страницы */
+        .nav-links a.active {
+            background: var(--primary-color);
+            color: var(--white-color);
+            box-shadow: 0 2px 5px rgba(74, 0, 224, 0.3);
+        }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: 500;
-            font-size: 15px; /* Увеличили размер шрифта */
-            padding: 12px 20px; /* Значительно увеличили отступы */
-            border-radius: 10px; /* Увеличили скругление */
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 44px; /* Минимальная высота для удобного нажатия */
-        }
-        
-        /* Анимация и эффект стекла для кнопок */
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: left 0.4s ease;
-        }
+        /* --- ОСНОВНОЕ СОДЕРЖИМОЕ (MAIN) --- */
+        main {
+            padding: 90px 15px 20px; /* Увеличили отступ сверху из-за большей высоты шапки */
+            flex: 1;
+        }
 
-        .nav-links a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-links a:hover::before {
-            left: 100%;
-        }
+        .hero-section {
+            text-align: center;
+            padding: 40px 0;
+        }
 
-        /* Выделение активной страницы */
-        .nav-links a.active {
-            background: var(--primary-color);
-            color: var(--white-color);
-            box-shadow: 0 2px 5px rgba(74, 0, 224, 0.3);
-        }
+        .hero-section h1 {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
 
-        /* --- ОСНОВНОЕ СОДЕРЖИМОЕ (MAIN) --- */
-        main {
-            padding: 90px 15px 20px; /* Увеличили отступ сверху из-за большей высоты шапки */
-            flex: 1;
-        }
+        .hero-section p {
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #555;
+        }
 
-        .hero-section {
-            text-align: center;
-            padding: 40px 0;
-        }
+        /* --- Раздел с преимуществами --- */
+        .features-section {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+        }
 
-        .hero-section h1 {
-            font-size: 28px;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
 
-        .hero-section p {
-            font-size: 16px;
-            max-width: 600px;
-            margin: 0 auto;
-            color: #555;
-        }
+        .feature-card {
+            background-color: var(--white-color);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-        /* --- Раздел с преимуществами --- */
-        .features-section {
-            padding: 40px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 30px;
-            color: var(--secondary-color);
-        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px auto;
+        }
+        
+        .feature-card h3 {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
+        .feature-card p {
+            font-size: 15px;
+        }
+        
+        /* --- Текст перед кнопкой --- */
+        .info-section {
+            text-align: center;
+            padding: 20px 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-        .feature-card {
-            background-color: var(--white-color);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+        .info-section p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-icon {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 15px auto;
-        }
-        
-        .feature-card h3 {
-            font-size: 20px;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
+        .info-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
 
-        .feature-card p {
-            font-size: 15px;
-        }
-        
-        /* --- Текст перед кнопкой --- */
-        .info-section {
-            text-align: center;
-            padding: 20px 0;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        .info-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* --- Кнопка "Открыть бота" --- */
+        .cta-section {
+            padding: 20px 0;
+            text-align: center;
+        }
 
-        .info-section p {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 20px;
-        }
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--white-color);
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
+            transition: all 0.3s ease;
+        }
 
-        .info-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(142, 45, 226, 0.6);
+        }
 
-        .info-link:hover {
-            text-decoration: underline;
-        }
-        
-        /* --- Кнопка "Открыть бота" --- */
-        .cta-section {
-            padding: 20px 0;
-            text-align: center;
-        }
+        /* --- ФУТЕР --- */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-align: center;
+            padding: 20px 15px;
+            font-size: 14px;
+        }
 
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--white-color);
-            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
-            border: none;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(142, 45, 226, 0.6);
-        }
-
-        /* --- ФУТЕР --- */
-        footer {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-            text-align: center;
-            padding: 20px 15px;
-            font-size: 14px;
-        }
-
-        /* --- Адаптивность --- */
-        /* Стили для экранов шире мобильных (например, планшеты) */
-        @media (min-width: 768px) {
-            .nav-links a {
-                font-size: 16px;
-                padding: 14px 22px; /* Увеличили отступы для планшетов */
-            }
-            .header-title {
-                font-size: 20px;
-            }
-            .features-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 20px;
-            }
-            .feature-card {
-                margin-bottom: 0;
-            }
-        }
-    </style>
+        /* --- Адаптивность --- */
+        /* Стили для экранов шире мобильных (например, планшеты) */
+        @media (min-width: 768px) {
+            .nav-links a {
+                font-size: 16px;
+                padding: 14px 22px; /* Увеличили отступы для планшетов */
+            }
+            .header-title {
+                font-size: 20px;
+            }
+            .features-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            .feature-card {
+                margin-bottom: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Заставка (Splash Screen) -->
-    <div id="splash-screen">
-        <div class="splash-logo">
-            <img src="logo.png" alt="SW Consultant Logo">
-        </div>
-        <h1 class="splash-title">SW Consultant</h1>
-    </div>
+    <!-- Заставка (Splash Screen) -->
+    <div id="splash-screen">
+        <div class="splash-logo">
+            <img src="logo.png" alt="SW Consultant Logo">
+        </div>
+        <h1 class="splash-title">SW Consultant</h1>
+    </div>
 
-    <!-- Шапка сайта -->
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="https://sw-consultant.github.io/docs/Home.html" class="logo-container">
-                <div class="header-logo">
-                    <img src="logo.png" alt="SW Logo">
-                </div>
-                <span class="header-title">SW Consultant</span>
-            </a>
-            <div class="nav-scroll-container">
-                <nav>
-                    <ul class="nav-links">
-                        <li><a href="https://sw-consultant.github.io/docs/Home.html" class="active">Главная</a></li>
-                        <li><a href="https://sw-consultant.github.io/docs/News.html">Новости</a></li>
-                        <li><a href="https://sw-consultant.github.io/docs/Promotions.html">Акции</a></li>
-                        <li><a href="https://sw-consultant.github.io/docs/Contacts.html">Контакты</a></li>
-                        <li><a href="https://sw-consultant.github.io/docs/Documentation.html">Документация</a></li>
-                        <li><a href="https://sw-consultant.github.io/docs/social.html">Соцсети</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
+    <!-- Шапка сайта -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="https://sw-consultant.github.io/docs/Home.html" class="logo-container">
+                <div class="header-logo">
+                    <img src="logo.png" alt="SW Logo">
+                </div>
+                <span class="header-title">SW Consultant</span>
+            </a>
+            <div class="nav-scroll-container">
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="https://sw-consultant.github.io/docs/Home.html" class="active">Главная</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/News.html">Новости</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Promotions.html">Акции</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Contacts.html">Контакты</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Documentation.html">Документация</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/social.html">Соцсети</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-    <!-- Основное содержимое страницы -->
-    <main>
-    <section class="hero-section">
-        <h1>SW Consultant - интеллектуальный помощник для бизнес-партнеров</h1>
-        <p>SW Consultant - это инновационный <strong>телеграм-бот с искусственным интеллектом</strong>, разработанный специально для <strong>бизнес-партнеров Siberian Wellness</strong>. Наш инструмент помогает автоматизировать рутинные задачи, увеличивает эффективность продаж и упрощает взаимодействие с клиентами.</p>
-    </section>
+    <!-- Основное содержимое страницы -->
+    <main>
+        <!-- Секция-приветствие -->
+        <section class="hero-section">
+            <h1>Ваш умный помощник в мире Siberian Wellness</h1>
+            <p>Мы предоставляем инновационный инструмент для бизнес-партнеров — телеграмм-бот с интегрированным искусственным интеллектом, который упрощает вашу работу и помогает достигать новых высот.</p>
+        </section>
 
-    <section class="features-section">
-        <h2 class="section-title">Особенности нашего инструмента</h2>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <img src="ai_brain.png" alt="Встроенный ИИ" class="feature-icon">
-                <h3>Встроенный ИИ</h3>
-                <p>Наш бот оснащен передовым искусственным интеллектом, который помогает отвечать на вопросы клиентов, подбирать продукцию и предоставлять консультации 24/7.</p>
-            </div>
+        <!-- Секция с преимуществами -->
+        <section class="features-section">
+            <h2 class="section-title">Особенности нашего инструмента</h2>
+            
+            <div class="features-grid">
+                <!-- Карточка 1: ИИ -->
+                <div class="feature-card">
+                    <!-- Иконка мозга (ИИ) -->
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm4 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-4 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm4 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+                    </svg>
+                    <h3>Встроенный ИИ</h3>
+                    <p>Наш бот оснащен передовым искусственным интеллектом, который помогает отвечать на вопросы клиентов, подбирать продукцию и предоставлять консультации 24/7.</p>
+                </div>
 
-            <div class="feature-card">
-                <img src="database.png" alt="Большая база данных" class="feature-icon">
-                <h3>Большая база данных</h3>
-                <p>Полный каталог продукции Siberian Wellness, обучающие материалы, скрипты продаж и ответы на часто задаваемые вопросы всегда под рукой в удобном формате.</p>
-            </div>
+                <!-- Карточка 2: База данных -->
+                <div class="feature-card">
+                    <!-- Иконка базы данных -->
+                    <svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm4 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-4 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm4 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+                    </svg>
+                    <h3>Большая база данных</h3>
+                    <p>Полный каталог продукции Siberian Wellness, обучающие материалы, скрипты продаж и ответы на часто задаваемые вопросы всегда под рукой в удобном формате.</p>
+                </div>
 
-            <div class="feature-card">
-                <img src="easy_use.png" alt="Легкость в использовании" class="feature-icon">
-                <h3>Легкость в использовании</h3>
-                <p>Интуитивно понятный интерфейс в привычном приложении Telegram. Начать работу с ботом можно всего за несколько кликов, без сложной настройки и обучения.</p>
-            </div>
+                <!-- Карточка 3: Легкость -->
+                <div class="feature-card">
+                    <!-- Иконка клика/касания -->
+                    <svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm2 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-4 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+                    </svg>
+                    <h3>Легкость в использовании</h3>
+                    <p>Интуитивно понятный интерфейс в привычном приложении Telegram. Начать работу с ботом можно всего за несколько кликов, без сложной настройки и обучения.</p>
+                </div>
 
-            <div class="feature-card">
-                <img src="tariffs.png" alt="Система тарифов" class="feature-icon">
-                <h3>Система тарифов</h3>
-                <p>Мы предлагаем гибкие тарифные планы, которые подойдут как начинающим партнерам, так и опытным лидерам структур. Выберите то, что подходит именно вам.</p>
-            </div>
+                <!-- Карточка 4: Тарифы -->
+                <div class="feature-card">
+                    <!-- Иконка ценника -->
+                    <svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm4 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-4 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm4 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+                    </svg>
+                    <h3>Система тарифов</h3>
+                    <p>Мы предлагаем гибкие тарифные планы, которые подойдут как начинающим партнерам, так и опытным лидерам структур. Выберите то, что подходит именно вам.</p>
+                </div>
 
-            <div class="feature-card">
-                <img src="sales_promo.png" alt="Акции" class="feature-icon">
-                <h3>Акции</h3>
-                <p>Пользователи нашего бота получают доступ к эксклюзивным акциям и специальным предложениям, которые помогут увеличить продажи и привлечь новых клиентов.</p>
-            </div>
+                <!-- Карточка 5: Акции -->
+                <div class="feature-card">
+                    <!-- Иконка подарка -->
+                    <svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm4 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-4 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm4 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+                    </svg>
+                    <h3>Акции</h3>
+                    <p>Пользователи нашего бота получают доступ к эксклюзивным акциям и специальным предложениям, которые помогут увеличить продажи и привлечь новых клиентов.</p>
+                </div>
 
-            <div class="feature-card">
-                <img src="rozigrishi.png" alt="Розыгрыши" class="feature-icon">
-                <h3>Розыгрыши</h3>
-                <p>Мы регулярно проводим розыгрыши ценных призов и бонусов среди активных пользователей бота, мотивируя их на достижение лучших результатов.</p>
-            </div>
-        </div>
-    </section>
-        <!-- Текст перед кнопкой -->
-        <section class="info-section">
-            <p>Перед началом использования ботом, пожалуйста, ознакомьтесь с <a href="https://sw-consultant.github.io/docs/Documentation.html" class="info-link">документацией</a>. Мы просим вас это сделать, чтобы обеспечить полное понимание всех возможностей и правил использования нашего инструмента, а также для защиты ваших прав и интересов как пользователя.</p>
-        </section>
+                <!-- Карточка 6: Розыгрыши -->
+                <div class="feature-card">
+                    <!-- Иконка звезды -->
+                    <svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                    </svg>
+                    <h3>Розыгрыши</h3>
+                    <p>Мы регулярно проводим розыгрыши ценных призов и бонусов среди активных пользователей бота, мотивируя их на достижение лучших результатов.</p>
+                </div>
+            </div>
+        </section>
 
-        <!-- Секция с кнопкой -->
-        <section class="cta-section">
-            <a href="https://t.me/SWConsultant_Bot" target="_blank" class="cta-button">Открыть бота</a>
-        </section>
-    </main>
+        <!-- Текст перед кнопкой -->
+        <section class="info-section">
+            <p>Перед началом использования ботом, пожалуйста, ознакомьтесь с <a href="https://sw-consultant.github.io/docs/Documentation.html" class="info-link">документацией</a>. Мы просим вас это сделать, чтобы обеспечить полное понимание всех возможностей и правил использования нашего инструмента, а также для защиты ваших прав и интересов как пользователя.</p>
+        </section>
 
-    <!-- Футер -->
-    <footer>
-        <p>&copy; 2025 SW Consultant. Все права защищены.</p>
-    </footer>
+        <!-- Секция с кнопкой -->
+        <section class="cta-section">
+            <a href="https://t.me/SWConsultant_Bot" target="_blank" class="cta-button">Открыть бота</a>
+        </section>
+    </main>
 
-    <script>
-        // Скрипт для скрытия заставки
-        window.addEventListener('DOMContentLoaded', () => {
-            const splashScreen = document.getElementById('splash-screen');
+    <!-- Футер -->
+    <footer>
+        <p>&copy; 2023 SW Consultant. Все права защищены.</p>
+    </footer>
 
-            setTimeout(() => {
-                splashScreen.classList.add('hidden');
-            }, 500); // 2000 миллисекунд = 2 секунды
-        });
-    </script>
+    <script>
+        // Скрипт для скрытия заставки
+        window.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.getElementById('splash-screen');
+
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+            }, 2000); // 2000 миллисекунд = 2 секунды
+        });
+    </script>
 
 </body>
 </html>
