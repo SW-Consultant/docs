@@ -6,8 +6,8 @@
     
     <!-- SEO Мета-теги -->
     <title>SW Consultant - Документация</title>
-    <meta name="description" content="Официальная документация Telegram-бота SW Consultant. Политика конфиденциальности, пользовательское соглашение и условия оплаты.">
-    <meta name="keywords" content="SW Consultant, документация, политика конфиденциальности, пользовательское соглашение, условия оплаты">
+    <meta name="description" content="Официальная документация Telegram-бота SW Consultant. Политика конфиденциальности, пользовательское соглашение, условия оплаты и другие важные документы.">
+    <meta name="keywords" content="SW Consultant, документация, политика конфиденциальности, пользовательское соглашение, условия оплаты, отказ от ответственности, политика использования ИИ, безопасность данных">
 
     <style>
         /* --- ОБЩИЕ СТИЛИ И ПЕРЕМЕННЫЕ --- */
@@ -334,7 +334,7 @@
 
         @media (min-width: 992px) {
             .doc-cards {
-                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-columns: repeat(3, 1fr);
             }
         }
     </style>
@@ -397,14 +397,42 @@
                 <div class="doc-card">
                     <h3>Пользовательское соглашение</h3>
                     <p>Ознакомьтесь с правилами использования бота, ограничениями ответственности и другими важными условиями.</p>
-                    <a href="https://sw-consultant.github.io/docs/user-agreement.html" class="doc-button" target="_blank">Перейти к документу</a>
+                    <a href="https://sw-consultant.github.io/docs/user_agreement.html" class="doc-button" target="_blank">Перейти к документу</a>
                 </div>
 
                 <!-- Карточка 3: Условия оплаты -->
                 <div class="doc-card">
-                    <h3>Условия оплаты</h3>
+                    <h3>Условия оплаты и пробного периода</h3>
                     <p>Информация о пробном периоде, тарифах, порядке оплаты и условиях возврата средств.</p>
                     <a href="https://sw-consultant.github.io/docs/payment-terms.html" class="doc-button" target="_blank">Перейти к документу</a>
+                </div>
+
+                <!-- Карточка 4: Отказ от ответственности -->
+                <div class="doc-card">
+                    <h3>Отказ от ответственности</h3>
+                    <p>Информация об ограничении ответственности и рисках, связанных с использованием бота и его рекомендациями.</p>
+                    <a href="https://sw-consultant.github.io/docs/disclaimer.html" class="doc-button" target="_blank">Перейти к документу</a>
+                </div>
+
+                <!-- Карточка 5: Политика использования -->
+                <div class="doc-card">
+                    <h3>Политика использования</h3>
+                    <p>Правила и рекомендации по корректному использованию функционала бота и ограничения на определенные действия.</p>
+                    <a href="https://sw-consultant.github.io/docs/usage_policy.html" class="doc-button" target="_blank">Перейти к документу</a>
+                </div>
+
+                <!-- Карточка 6: Политика использования ИИ -->
+                <div class="doc-card">
+                    <h3>Политика использования искусственного интеллекта</h3>
+                    <p>Особенности и этические принципы использования технологий искусственного интеллекта в работе бота.</p>
+                    <a href="https://sw-consultant.github.io/docs/policy-on-the-use-of-AI.html" class="doc-button" target="_blank">Перейти к документу</a>
+                </div>
+
+                <!-- Карточка 7: Политика безопасности данных -->
+                <div class="doc-card">
+                    <h3>Политика безопасности данных</h3>
+                    <p>Меры по защите данных, предотвращению утечек информации и обеспечению безопасности пользовательских данных.</p>
+                    <a href="https://sw-consultant.github.io/docs/data-protection-policy.html" class="doc-button" target="_blank">Перейти к документу</a>
                 </div>
             </div>
         </section>
@@ -417,7 +445,7 @@
 
             setTimeout(() => {
                 splashScreen.classList.add('hidden');
-            }, 500); // 2000 миллисекунд = 2 секунды
+            }, 500); // 500 миллисекунд
         });
     </script>
 
