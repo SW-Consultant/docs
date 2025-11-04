@@ -38,6 +38,97 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden; /* Предотвращение горизонтальной прокрутки */
+            position: relative; /* Для позиционирования фона */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- АНИМИРОВАННЫЙ ФОН --- */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Помещаем фон под контент */
+            overflow: hidden;
+            background: linear-gradient(135deg, #f4f7f9 0%, #e2ebf0 100%);
+        }
+
+        .bg-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(74, 0, 224, 0.05) 0%, rgba(142, 45, 226, 0.05) 100%);
+            filter: blur(2px);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-bubble:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            animation-duration: 25s;
+            background: linear-gradient(135deg, rgba(74, 0, 224, 0.08) 0%, rgba(142, 45, 226, 0.08) 100%);
+        }
+
+        .bg-bubble:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 70%;
+            right: -100px;
+            animation-duration: 20s;
+            animation-delay: 2s;
+            background: linear-gradient(135deg, rgba(0, 198, 255, 0.06) 0%, rgba(142, 45, 226, 0.06) 100%);
+        }
+
+        .bg-bubble:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            bottom: -125px;
+            left: 30%;
+            animation-duration: 30s;
+            animation-delay: 5s;
+            background: linear-gradient(135deg, rgba(74, 0, 224, 0.07) 0%, rgba(0, 198, 255, 0.07) 100%);
+        }
+
+        .bg-bubble:nth-child(4) {
+            width: 180px;
+            height: 180px;
+            top: 40%;
+            left: -90px;
+            animation-duration: 22s;
+            animation-delay: 7s;
+            background: linear-gradient(135deg, rgba(142, 45, 226, 0.08) 0%, rgba(0, 198, 255, 0.08) 100%);
+        }
+
+        .bg-bubble:nth-child(5) {
+            width: 220px;
+            height: 220px;
+            top: 20%;
+            right: 20%;
+            animation-duration: 28s;
+            animation-delay: 3s;
+            background: linear-gradient(135deg, rgba(0, 198, 255, 0.07) 0%, rgba(74, 0, 224, 0.07) 100%);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(20px, 30px) rotate(90deg);
+            }
+            50% {
+                transform: translate(40px, 10px) rotate(180deg);
+            }
+            75% {
+                transform: translate(20px, -20px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
         }
 
         /* --- ЗАСТАВКА (SPLASH SCREEN) --- */
@@ -226,6 +317,9 @@
         /* --- ОСНОВНОЕ СОДЕРЖИМОЕ (MAIN) --- */
         main {
             padding: 90px 15px 20px; /* Увеличили отступ сверху из-за большей высоты шапки */
+            position: relative;
+            z-index: 1; /* Убедимся, что контент над фоном */
+            flex: 1; /* Позволяет main занять все доступное пространство */
         }
 
         .contact-section {
@@ -273,7 +367,6 @@
             width: 60px; /* Увеличили размер иконок */
             height: 60px; /* Увеличили размер иконок */
             margin: 0 auto 20px auto; /* Увеличили отступ */
-            fill: var(--accent-color);
         }
 
         .contact-card h3 {
@@ -353,6 +446,15 @@
             color: var(--text-color);
         }
 
+        /* --- ФУТЕР --- */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-align: center;
+            padding: 20px 15px;
+            font-size: 14px;
+        }
+
         /* --- Адаптивность --- */
         /* Стили для экранов шире мобильных (например, планшеты) */
         @media (min-width: 768px) {
@@ -378,6 +480,15 @@
     </style>
 </head>
 <body>
+
+    <!-- Анимированный фон -->
+    <div class="animated-bg">
+        <div class="bg-bubble"></div>
+        <div class="bg-bubble"></div>
+        <div class="bg-bubble"></div>
+        <div class="bg-bubble"></div>
+        <div class="bg-bubble"></div>
+    </div>
 
     <!-- Заставка (Splash Screen) -->
     <div id="splash-screen">
@@ -451,23 +562,8 @@
 
                 <!-- Карточка 3: Бот поддержки -->
                 <div class="contact-card">
-                    <!-- Улучшенная иконка Telegram -->
-                    <svg class="contact-icon" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="a" x1=".66" x2=".851" y1=".437" y2=".802">
-                                <stop offset="0" stop-color="#37aee2"/>
-                                <stop offset="1" stop-color="#1e96c8"/>
-                            </linearGradient>
-                            <linearGradient id="b" x1=".66" x2=".851" y1=".437" y2=".802">
-                                <stop offset="0" stop-color="#eff7fc"/>
-                                <stop offset="1" stop-color="#fff"/>
-                            </linearGradient>
-                        </defs>
-                        <circle cx="120" cy="120" r="120" fill="url(#a)"/>
-                        <path fill="#c8daea" d="M98 175c-3.888 0-3.227-1.468-4.568-5.17L82 132.207 170 80"/>
-                        <path fill="#a9c6dd" d="M98 175c3 0 4.325-1.372 6-3l16-15.558-19.958-12.035"/>
-                        <path fill="url(#b)" d="M100.04 144.41l48.36 35.729c5.519 3.045 9.501 1.468 10.876-5.123l19.685-92.763c2.015-8.08-3.08-11.746-8.36-9.349l-115.59 44.571c-7.89 3.165-7.843 7.567-1.438 9.528l29.663 9.259 68.673-43.325c3.242-1.966 6.218-.91 3.776 1.258"/>
-                    </svg>
+                    <!-- Иконка Telegram из изображения -->
+                    <img src="telegram.png" alt="Telegram" class="contact-icon">
                     <h3>Бот поддержки</h3>
                     <p>t.me/SWCsupport_Bot</p>
                     <a href="https://t.me/SWCsupport_Bot" class="contact-button" target="_blank">Перейти к боту</a>
@@ -476,6 +572,11 @@
         </section>
     </main>
 
+    <!-- Футер -->
+    <footer>
+        <p>&copy; 2025 SW Consultant. Все права защищены.</p>
+    </footer>
+
     <script>
         // Скрипт для скрытия заставки
         window.addEventListener('DOMContentLoaded', () => {
@@ -483,7 +584,7 @@
 
             setTimeout(() => {
                 splashScreen.classList.add('hidden');
-            }, 500); // 2000 миллисекунд = 2 секунды
+            }, 500); // 500 миллисекунд
         });
     </script>
 
