@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO Мета-теги -->
-    <title>SW Consultant - Контакты</title>
-    <meta name="description" content="Контактная информация для связи с поддержкой SW Consultant. Телефон, email и бот технической поддержки.">
-    <meta name="keywords" content="SW Consultant, контакты, поддержка, техническая помощь, обратная связь">
+    <title>SW Consultant - Документация</title>
+    <meta name="description" content="Официальная документация Telegram-бота SW Consultant. Политика конфиденциальности, пользовательское соглашение, условия оплаты и другие важные документы.">
+    <meta name="keywords" content="SW Consultant, документация, политика конфиденциальности, пользовательское соглашение, условия оплаты, отказ от ответственности, политика использования ИИ, безопасность данных">
 
     <style>
         /* --- ОБЩИЕ СТИЛИ И ПЕРЕМЕННЫЕ --- */
@@ -316,76 +316,69 @@
 
         /* --- ОСНОВНОЕ СОДЕРЖИМОЕ (MAIN) --- */
         main {
-            padding: 90px 15px 20px; /* Увеличили отступ сверху из-за большей высоты шапки */
+            padding: 90px 15px 20px; /* Добавлен отступ сверху для фиксированного хедера */
             position: relative;
             z-index: 1; /* Убедимся, что контент над фоном */
             flex: 1; /* Позволяет main занять все доступное пространство */
         }
 
-        .contact-section {
+        .doc-section {
             max-width: 800px;
             margin: 0 auto;
             text-align: center;
             padding: 40px 0;
         }
 
-        .contact-section h1 {
+        .doc-section h1 {
             font-size: 28px;
             color: var(--primary-color);
             margin-bottom: 20px;
         }
 
-        .contact-section p {
+        .doc-section p {
             font-size: 16px;
             color: #555;
             margin-bottom: 30px;
             line-height: 1.7;
         }
 
-        .contact-cards {
+        .doc-cards {
             display: flex;
             flex-direction: column;
-            gap: 30px; /* Увеличили отступ между карточками */
+            gap: 20px;
             margin-top: 40px;
         }
 
-        .contact-card {
+        .doc-card {
             background-color: var(--white-color);
             border-radius: 15px;
-            padding: 30px; /* Увеличили внутренние отступы */
+            padding: 25px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .contact-card:hover {
+        .doc-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .contact-icon {
-            width: 60px; /* Увеличили размер иконок */
-            height: 60px; /* Увеличили размер иконок */
-            margin: 0 auto 20px auto; /* Увеличили отступ */
-        }
-
-        .contact-card h3 {
-            font-size: 22px; /* Увеличили размер заголовка */
+        .doc-card h3 {
+            font-size: 20px;
             color: var(--primary-color);
             margin-bottom: 15px;
         }
 
-        .contact-card p {
-            font-size: 16px;
+        .doc-card p {
+            font-size: 15px;
             color: #666;
-            margin-bottom: 25px; /* Увеличили отступ */
-            font-weight: 500;
+            margin-bottom: 20px;
         }
 
-        .contact-button {
+        .doc-button {
             display: inline-block;
-            padding: 16px 30px; /* Значительно увеличили отступы */
-            font-size: 18px; /* Увеличили размер шрифта */
+            padding: 12px 25px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--white-color);
             background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
@@ -394,13 +387,9 @@
             text-decoration: none;
             box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
             transition: all 0.3s ease;
-            min-height: 56px; /* Минимальная высота для удобного нажатия */
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .contact-button:hover {
+        .doc-button:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 20px rgba(142, 45, 226, 0.6);
         }
@@ -408,7 +397,7 @@
         .notice-box {
             background-color: rgba(74, 0, 224, 0.1);
             border-left: 4px solid var(--primary-color);
-            padding: 20px 25px; /* Увеличили отступы */
+            padding: 15px 20px;
             border-radius: 8px;
             margin: 30px 0;
             text-align: left;
@@ -418,32 +407,6 @@
             margin: 0;
             color: var(--primary-color);
             font-weight: 500;
-            font-size: 16px; /* Увеличили размер шрифта */
-        }
-
-        .contact-info {
-            text-align: left;
-            background-color: var(--white-color);
-            border-radius: 15px;
-            padding: 30px; /* Увеличили отступы */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin: 30px 0;
-        }
-
-        .contact-info h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px; /* Увеличили отступ */
-            font-size: 22px; /* Увеличили размер шрифта */
-        }
-
-        .contact-info p {
-            margin-bottom: 15px; /* Увеличили отступ */
-            color: #555;
-            font-size: 16px; /* Увеличили размер шрифта */
-        }
-
-        .contact-info strong {
-            color: var(--text-color);
         }
 
         /* --- ФУТЕР --- */
@@ -465,16 +428,16 @@
             .header-title {
                 font-size: 20px;
             }
-            .contact-cards {
+            .doc-cards {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                gap: 35px; /* Увеличили отступы для планшетов */
+                gap: 25px;
             }
         }
 
         @media (min-width: 992px) {
-            .contact-cards {
-                grid-template-columns: 1fr 1fr 1fr;
+            .doc-cards {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
     </style>
@@ -513,8 +476,8 @@
                         <li><a href="https://sw-consultant.github.io/docs/Home.html">Главная</a></li>
                         <li><a href="https://sw-consultant.github.io/docs/News.html">Новости</a></li>
                         <li><a href="https://sw-consultant.github.io/docs/Promotions.html">Акции</a></li>
-                        <li><a href="https://sw-consultant.github.io/docs/Contacts.html" class="active">Контакты</a></li>
-                        <li><a href="https://sw-consultant.github.io/docs/Documentation.html">Документация</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Contacts.html">Контакты</a></li>
+                        <li><a href="https://sw-consultant.github.io/docs/Documentation.html" class="active">Документация</a></li>
                         <li><a href="https://sw-consultant.github.io/docs/social.html">Соцсети</a></li>
                     </ul>
                 </nav>
@@ -524,49 +487,64 @@
 
     <!-- Основное содержимое страницы -->
     <main>
-        <!-- Секция с контактами -->
-        <section class="contact-section">
-            <h1>Контакты</h1>
+        <!-- Секция с документацией -->
+        <section class="doc-section">
+            <h1>Документация SW Consultant</h1>
             
-            <p>Мы всегда рады помочь вам! Если у вас есть предложения, вопросы или вы обнаружили ошибки в работе бота или сайта, пожалуйста, свяжитесь с нами одним из указанных ниже способов.</p>
+            <p>Перед использованием Telegram-бота SW Consultant, пожалуйста, ознакомьтесь с официальной документацией. Это обеспечит ваше понимание правил использования, политики конфиденциальности и условий оплаты.</p>
             
             <div class="notice-box">
-                <p>Наши специалисты ответят вам в кратчайшие сроки и постараются решить любой вопрос.</p>
+                <p>Внимание! Начало/продолжение использования бота означает полное согласие со всеми нижеуказанными документами.</p>
             </div>
             
-            <div class="contact-info">
-                <h3>Для связи с нами используйте следующие контакты:</h3>
-                <p><strong>Номер телефона:</strong> +7 771 262 4034</p>
-                <p><strong>Электронная почта:</strong> swconsultant@mail.ru</p>
-                <p><strong>Бот технической поддержки:</strong> t.me/SWCsupport_Bot</p>
-            </div>
-            
-            <div class="contact-cards">
-                <!-- Карточка 1: Телефон -->
-                <div class="contact-card">
-                    <!-- Иконка телефона -->
-                    <svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/></svg>
-                    <h3>Телефон</h3>
-                    <p>+7 771 262 4034</p>
-                    <a href="tel:+77712624034" class="contact-button">Позвонить</a>
+            <div class="doc-cards">
+                <!-- Карточка 1: Политика конфиденциальности -->
+                <div class="doc-card">
+                    <h3>Политика конфиденциальности</h3>
+                    <p>Узнайте, как мы собираем, храним и защищаем ваши персональные данные при использовании бота.</p>
+                    <a href="https://sw-consultant.github.io/docs/privacy-policy.html" class="doc-button" target="_blank">Перейти к документу</a>
                 </div>
 
-                <!-- Карточка 2: Email -->
-                <div class="contact-card">
-                    <!-- Иконка почты -->
-                    <svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
-                    <h3>Электронная почта</h3>
-                    <p>swconsultant@mail.ru</p>
-                    <a href="mailto:swconsultant@mail.ru" class="contact-button">Написать письмо</a>
+                <!-- Карточка 2: Пользовательское соглашение -->
+                <div class="doc-card">
+                    <h3>Пользовательское соглашение</h3>
+                    <p>Ознакомьтесь с правилами использования бота, ограничениями ответственности и другими важными условиями.</p>
+                    <a href="https://sw-consultant.github.io/docs/user_agreement.html" class="doc-button" target="_blank">Перейти к документу</a>
                 </div>
 
-                <!-- Карточка 3: Бот поддержки -->
-                <div class="contact-card">
-                    <!-- Иконка Telegram из изображения -->
-                    <img src="telegram.png" alt="Telegram" class="contact-icon">
-                    <h3>Бот поддержки</h3>
-                    <p>t.me/SWCsupport_Bot</p>
-                    <a href="https://t.me/SWCsupport_Bot" class="contact-button" target="_blank">Перейти к боту</a>
+                <!-- Карточка 3: Условия оплаты -->
+                <div class="doc-card">
+                    <h3>Условия оплаты и пробного периода</h3>
+                    <p>Информация о пробном периоде, тарифах, порядке оплаты и условиях возврата средств.</p>
+                    <a href="https://sw-consultant.github.io/docs/payment-terms.html" class="doc-button" target="_blank">Перейти к документу</a>
+                </div>
+
+                <!-- Карточка 4: Отказ от ответственности -->
+                <div class="doc-card">
+                    <h3>Отказ от ответственности</h3>
+                    <p>Информация об ограничении ответственности и рисках, связанных с использованием бота и его рекомендациями.</p>
+                    <a href="https://sw-consultant.github.io/docs/disclaimer.html" class="doc-button" target="_blank">Перейти к документу</a>
+                </div>
+
+                <!-- Карточка 5: Политика использования -->
+                <div class="doc-card">
+                    <h3>Политика использования</h3>
+                    <p>Правила и рекомендации по корректному использованию функционала бота и ограничения на определенные действия.</p>
+                    <a href="https://sw-consultant.github.io/docs/usage_policy.html" class="doc-button" target="_blank">Перейти к документу</a>
+                </div>
+
+                <!-- Карточка 6: Политика использования ИИ -->
+                <div class="doc-card">
+                    <h3>Политика использования искусственного интеллекта</h3>
+                    <p>Особенности и этические принципы использования технологий искусственного интеллекта в работе бота.</p>
+                    <a href="https://sw-consultant.github.io/docs/policy-on-the-use-of-AI.html" class="doc-button" target="_blank">Перейти к документу</a>
+                </div>
+
+                <!-- Карточка 7: Политика безопасности данных -->
+                <div class="doc-card">
+                    <h3>Политика безопасности данных</h3>
+                    <p>Меры по защите данных, предотвращению утечек информации и обеспечению безопасности пользовательских данных.</p>
+                    <a href="https://sw-consultant.github.io/docs/data-protection-policy.html" class="doc-button" target="_blank">Перейти к документу</a>
                 </div>
             </div>
         </section>
