@@ -38,9 +38,97 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden; /* Предотвращение горизонтальной прокрутки */
+            position: relative; /* Для позиционирования фона */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+        }
+
+        /* --- АНИМИРОВАННЫЙ ФОН --- */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Помещаем фон под контент */
+            overflow: hidden;
+            background: linear-gradient(135deg, #f4f7f9 0%, #e2ebf0 100%);
+        }
+
+        .bg-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(74, 0, 224, 0.05) 0%, rgba(142, 45, 226, 0.05) 100%);
+            filter: blur(2px);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-bubble:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            animation-duration: 25s;
+            background: linear-gradient(135deg, rgba(74, 0, 224, 0.08) 0%, rgba(142, 45, 226, 0.08) 100%);
+        }
+
+        .bg-bubble:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 70%;
+            right: -100px;
+            animation-duration: 20s;
+            animation-delay: 2s;
+            background: linear-gradient(135deg, rgba(0, 198, 255, 0.06) 0%, rgba(142, 45, 226, 0.06) 100%);
+        }
+
+        .bg-bubble:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            bottom: -125px;
+            left: 30%;
+            animation-duration: 30s;
+            animation-delay: 5s;
+            background: linear-gradient(135deg, rgba(74, 0, 224, 0.07) 0%, rgba(0, 198, 255, 0.07) 100%);
+        }
+
+        .bg-bubble:nth-child(4) {
+            width: 180px;
+            height: 180px;
+            top: 40%;
+            left: -90px;
+            animation-duration: 22s;
+            animation-delay: 7s;
+            background: linear-gradient(135deg, rgba(142, 45, 226, 0.08) 0%, rgba(0, 198, 255, 0.08) 100%);
+        }
+
+        .bg-bubble:nth-child(5) {
+            width: 220px;
+            height: 220px;
+            top: 20%;
+            right: 20%;
+            animation-duration: 28s;
+            animation-delay: 3s;
+            background: linear-gradient(135deg, rgba(0, 198, 255, 0.07) 0%, rgba(74, 0, 224, 0.07) 100%);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(20px, 30px) rotate(90deg);
+            }
+            50% {
+                transform: translate(40px, 10px) rotate(180deg);
+            }
+            75% {
+                transform: translate(20px, -20px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
         }
 
         /* --- ЗАСТАВКА (SPLASH SCREEN) --- */
@@ -230,6 +318,8 @@
         main {
             padding: 90px 15px 20px; /* Увеличили отступ сверху из-за большей высоты шапки */
             flex: 1;
+            position: relative;
+            z-index: 1; /* Убедимся, что контент над фоном */
         }
 
         .hero-section {
@@ -380,6 +470,15 @@
     </style>
 </head>
 <body>
+
+    <!-- Анимированный фон -->
+    <div class="animated-bg">
+        <div class="bg-bubble"></div>
+        <div class="bg-bubble"></div>
+        <div class="bg-bubble"></div>
+        <div class="bg-bubble"></div>
+        <div class="bg-bubble"></div>
+    </div>
 
     <!-- Заставка (Splash Screen) -->
     <div id="splash-screen">
