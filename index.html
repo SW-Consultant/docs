@@ -1473,7 +1473,7 @@
 
         @media (max-width: 768px) {
             nav {
-                padding: 8px 24px;
+                padding: 8px 16px;
             }
 
             .nav-links, .nav-cta {
@@ -1486,29 +1486,146 @@
                 justify-content: center;
             }
 
+            /* Hero Section - Stack vertically on mobile */
             .hero {
-                padding: 80px 24px 60px;
+                padding: 80px 16px 60px;
+                min-height: auto;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-content {
+                text-align: center;
+                order: 2;
+            }
+
+            .hero-description {
+                font-size: 16px;
+                margin-bottom: 24px;
+                max-width: 100%;
+            }
+
+            .hero-features {
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .hero-feature {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .hero-cta-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .hero-cta {
+                padding: 16px 32px;
+                font-size: 16px;
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .hero-cta-secondary {
+                padding: 16px 28px;
+                font-size: 16px;
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .hero-badge {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            /* Hero Logo Section - Move to top on mobile */
+            .hero-logo-section {
+                order: 1;
             }
 
             .hero-preview-wrapper {
-                max-width: 300px;
+                max-width: 280px;
+                margin: 0 auto;
             }
 
             .hero-logo-overlay {
-                width: 70px;
-                height: 70px;
-                bottom: -18px;
-                right: -18px;
+                width: 60px;
+                height: 60px;
+                bottom: -15px;
+                right: -15px;
             }
 
+            /* Section Styles - Reduce padding for mobile */
             section {
-                padding: 60px 24px;
+                padding: 60px 16px;
             }
 
+            .section-header {
+                margin-bottom: 48px;
+            }
+
+            .section-label {
+                font-size: 12px;
+                padding: 6px 14px;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 28px !important;
+                margin-bottom: 16px;
+            }
+
+            .section-description {
+                font-size: 15px;
+            }
+
+            /* Features Grid - Single column on mobile */
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 28px 20px;
+            }
+
+            .feature-icon {
+                width: 64px;
+                height: 64px;
+                margin-bottom: 20px;
+            }
+
+            .feature-icon svg {
+                width: 28px;
+                height: 28px;
+            }
+
+            .feature-card h3 {
+                font-size: 18px;
+            }
+
+            .feature-card p {
+                font-size: 14px;
+            }
+
+            /* Pricing Grid - Single column on mobile */
             .pricing-grid {
                 grid-template-columns: 1fr;
-                max-width: 380px;
+                max-width: 340px;
                 margin: 0 auto;
+                gap: 20px;
+            }
+
+            .pricing-card {
+                padding: 28px 20px;
             }
 
             .pricing-card.featured {
@@ -1516,34 +1633,211 @@
             }
 
             .pricing-card.featured:hover {
-                transform: translateY(-8px);
+                transform: translateY(-5px);
             }
 
-            .contact-info-grid {
+            .pricing-name {
+                font-size: 18px;
+            }
+
+            .pricing-price {
+                font-size: 38px;
+            }
+
+            .pricing-period {
+                font-size: 14px;
+                margin-bottom: 16px;
+            }
+
+            .pricing-cta {
+                padding: 14px 24px;
+                font-size: 14px;
+            }
+
+            .trial-banner {
+                padding: 20px;
+                margin-bottom: 32px;
+            }
+
+            .trial-banner-icon {
+                width: 44px;
+                height: 44px;
+            }
+
+            .trial-banner-text strong {
+                font-size: 16px;
+            }
+
+            .trial-banner-text span {
+                font-size: 14px;
+            }
+
+            /* Demo Section - Stack on mobile */
+            .demo-container {
                 grid-template-columns: 1fr;
-                max-width: 400px;
+                gap: 40px;
+                padding: 0;
+            }
+
+            .demo-content {
+                text-align: center;
+                padding-right: 0;
+            }
+
+            .demo-content .section-label,
+            .demo-content .section-title,
+            .demo-content .section-description {
+                text-align: center;
+            }
+
+            .demo-list {
+                max-width: 100%;
                 margin: 0 auto;
             }
 
-            .demo-container {
-                padding: 0 20px;
+            .demo-list li {
+                font-size: 15px;
+                padding: 14px 0;
+            }
+
+            .phone-wrapper {
+                order: -1;
+            }
+
+            .phone-mockup {
+                width: 280px;
+                height: 560px;
+                transform: rotateY(0deg) rotateX(0deg);
+            }
+
+            /* About Section - Stack on mobile */
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .about-image {
+                max-width: 280px;
+                margin: 0 auto;
             }
 
             .about-stats {
                 justify-content: center;
+                gap: 24px;
+            }
+
+            .about-stat-number {
+                font-size: 28px;
+            }
+
+            .about-stat-label {
+                font-size: 13px;
+            }
+
+            /* Contact Section - Single column on mobile */
+            .contacts-container {
+                padding: 0;
+            }
+
+            .contact-info-grid {
+                grid-template-columns: 1fr;
+                max-width: 340px;
+                margin: 0 auto;
+                gap: 16px;
+            }
+
+            .contact-card {
+                padding: 24px;
+            }
+
+            /* Footer - Center text on mobile */
+            footer {
+                padding: 24px 16px;
+            }
+
+            footer p {
+                font-size: 13px;
+            }
+
+            /* Floating Shapes - Reduce size on mobile */
+            .floating-shape {
+                transform: scale(0.5);
+            }
+
+            .shape-1 {
+                top: -400px;
+                right: -200px;
+            }
+
+            .shape-2 {
+                bottom: -300px;
+                left: -150px;
+            }
+
+            .shape-3 {
+                display: none;
+            }
+
+            /* Glass Card - Reduce padding on mobile */
+            .glass-card {
+                padding: 24px;
+            }
+
+            /* Social Links - Center on mobile */
+            .social-links {
+                justify-content: center;
+            }
+
+            /* Ensure max-width: 100% for all images and elements */
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            /* Fix horizontal scroll */
+            * {
+                max-width: 100vw;
             }
         }
 
         @media (max-width: 480px) {
             .phone-mockup {
-                width: 280px;
-                height: 560px;
+                width: 260px;
+                height: 520px;
+            }
+
+            .hero {
+                padding: 70px 12px 50px;
+            }
+
+            .hero-container {
+                gap: 32px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+
+            .hero-features {
+                gap: 6px;
+            }
+
+            .hero-feature {
+                padding: 8px 12px;
+                font-size: 12px;
+                gap: 6px;
+            }
+
+            .hero-feature svg {
+                width: 16px;
+                height: 16px;
             }
 
             .hero-cta-group {
                 flex-direction: column;
                 align-items: center;
-                gap: 16px;
+                gap: 12px;
             }
 
             .hero-cta-wrapper {
@@ -1554,34 +1848,41 @@
             .hero-cta {
                 width: 100%;
                 justify-content: center;
+                padding: 14px 28px;
+                font-size: 15px;
             }
 
             .hero-cta-secondary {
                 width: 100%;
                 max-width: 280px;
                 justify-content: center;
+                padding: 14px 24px;
+                font-size: 15px;
             }
 
             .hero-badge {
                 width: 100%;
                 max-width: 280px;
                 justify-content: center;
+                padding: 8px 16px;
+                font-size: 13px;
             }
 
             .trial-banner {
                 flex-direction: column;
                 text-align: center;
+                padding: 16px;
             }
 
             .hero-preview-wrapper {
-                max-width: 260px;
+                max-width: 240px;
             }
 
             .hero-logo-overlay {
-                width: 55px;
-                height: 55px;
-                bottom: -14px;
-                right: -14px;
+                width: 50px;
+                height: 50px;
+                bottom: -12px;
+                right: -12px;
             }
 
             .nav-logo-tagline {
@@ -1599,6 +1900,88 @@
 
             .nav-logo-text {
                 font-size: 18px;
+            }
+
+            section {
+                padding: 48px 12px;
+            }
+
+            .section-title {
+                font-size: 24px !important;
+            }
+
+            .section-description {
+                font-size: 14px;
+            }
+
+            .features-grid {
+                gap: 16px;
+            }
+
+            .feature-card {
+                padding: 24px 16px;
+            }
+
+            .feature-icon {
+                width: 56px;
+                height: 56px;
+            }
+
+            .feature-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .feature-card h3 {
+                font-size: 16px;
+            }
+
+            .pricing-grid {
+                max-width: 300px;
+                gap: 16px;
+            }
+
+            .pricing-card {
+                padding: 24px 16px;
+            }
+
+            .pricing-name {
+                font-size: 16px;
+            }
+
+            .pricing-price {
+                font-size: 32px;
+            }
+
+            .about-stat-number {
+                font-size: 24px;
+            }
+
+            .contact-info-grid {
+                max-width: 300px;
+            }
+
+            .contact-card {
+                padding: 20px 16px;
+            }
+
+            .floating-shape {
+                transform: scale(0.3);
+            }
+
+            .shape-1 {
+                top: -450px;
+                right: -250px;
+            }
+
+            .shape-2 {
+                bottom: -350px;
+                left: -200px;
+            }
+
+            footer p {
+                font-size: 12px;
+                line-height: 1.5;
             }
         }
 
