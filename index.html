@@ -133,7 +133,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 16px 48px;
+            padding: 10px 48px;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -145,7 +145,7 @@
         }
 
         nav.scrolled {
-            padding: 12px 48px;
+            padding: 8px 48px;
             background: rgba(255, 255, 255, 0.95);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
@@ -158,8 +158,8 @@
         }
 
         .nav-logo-icon {
-            width: 84px;
-            height: 84px;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -177,7 +177,7 @@
         }
 
         .nav-logo-text {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
             background: var(--gradient-main);
             -webkit-background-clip: text;
@@ -192,7 +192,7 @@
         }
 
         .nav-logo-tagline {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 400;
             color: var(--text-gray);
             letter-spacing: 0.2px;
@@ -480,8 +480,9 @@
         }
 
         .hero-cta-caption {
-            font-size: 12px;
-            color: var(--text-light);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-gray);
             text-align: center;
             margin-top: -4px;
         }
@@ -527,29 +528,62 @@
         .hero-preview-wrapper {
             position: relative;
             width: 100%;
-            max-width: 320px;
+            max-width: 500px;
+            animation: previewFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes previewFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
         }
 
         .hero-preview-image {
             width: 100%;
             height: auto;
             border-radius: var(--radius-xl);
-            box-shadow: 0 25px 80px rgba(109, 40, 217, 0.35);
+            box-shadow: 0 30px 100px rgba(109, 40, 217, 0.4);
+            animation: previewFadeIn 1.2s ease-out;
+        }
+
+        @keyframes previewFadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateX(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateX(0);
+            }
         }
 
         .hero-logo-overlay {
             position: absolute;
-            bottom: -20px;
-            right: -20px;
-            width: 80px;
-            height: 80px;
+            bottom: -25px;
+            right: -25px;
+            width: 100px;
+            height: 100px;
             background: var(--white);
             border-radius: var(--radius-lg);
-            padding: 8px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            padding: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
+            animation: logoPop 0.6s ease-out 0.8s both;
+        }
+
+        @keyframes logoPop {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            70% {
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .hero-logo-small {
@@ -1364,7 +1398,7 @@
         @media (max-width: 1024px) {
             .hero-container {
                 grid-template-columns: 1fr;
-                gap: 50px;
+                gap: 40px;
             }
 
             .hero-content {
@@ -1390,14 +1424,14 @@
             }
 
             .hero-preview-wrapper {
-                max-width: 280px;
+                max-width: 350px;
             }
 
             .hero-logo-overlay {
-                width: 60px;
-                height: 60px;
-                bottom: -15px;
-                right: -15px;
+                width: 80px;
+                height: 80px;
+                bottom: -20px;
+                right: -20px;
             }
 
             .demo-container {
@@ -1439,7 +1473,7 @@
 
         @media (max-width: 768px) {
             nav {
-                padding: 14px 24px;
+                padding: 8px 24px;
             }
 
             .nav-links, .nav-cta {
@@ -1453,22 +1487,22 @@
             }
 
             .hero {
-                padding: 120px 24px 80px;
+                padding: 80px 24px 60px;
             }
 
             .hero-preview-wrapper {
-                max-width: 260px;
+                max-width: 300px;
             }
 
             .hero-logo-overlay {
-                width: 55px;
-                height: 55px;
-                bottom: -14px;
-                right: -14px;
+                width: 70px;
+                height: 70px;
+                bottom: -18px;
+                right: -18px;
             }
 
             section {
-                padding: 80px 24px;
+                padding: 60px 24px;
             }
 
             .pricing-grid {
@@ -1540,14 +1574,14 @@
             }
 
             .hero-preview-wrapper {
-                max-width: 240px;
+                max-width: 260px;
             }
 
             .hero-logo-overlay {
-                width: 50px;
-                height: 50px;
-                bottom: -12px;
-                right: -12px;
+                width: 55px;
+                height: 55px;
+                bottom: -14px;
+                right: -14px;
             }
 
             .nav-logo-tagline {
@@ -1556,6 +1590,15 @@
 
             .nav-logo-content {
                 gap: 6px;
+            }
+
+            .nav-logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .nav-logo-text {
+                font-size: 18px;
             }
         }
 
