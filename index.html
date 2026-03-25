@@ -187,16 +187,15 @@
 
         .nav-logo-content {
             display: flex;
-            flex-direction: column;
-            gap: 2px;
+            align-items: baseline;
+            gap: 8px;
         }
 
         .nav-logo-tagline {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 400;
             color: var(--text-gray);
-            letter-spacing: 0.3px;
-            line-height: 1.3;
+            letter-spacing: 0.2px;
         }
 
         .nav-center {
@@ -365,34 +364,13 @@
         }
 
         .hero h1 {
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            letter-spacing: -0.02em;
-        }
-
-        .hero h1 .gradient-text {
-            background: var(--gradient-main);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-        }
-
-        .hero h1 .subtitle {
-            font-size: clamp(20px, 3vw, 32px);
-            font-weight: 600;
-            background: linear-gradient(135deg, #374151 0%, #6B7280 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            display: none;
         }
 
         .hero-description {
             font-size: clamp(15px, 1.8vw, 18px);
             color: var(--text-gray);
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             line-height: 1.7;
             max-width: 580px;
         }
@@ -537,27 +515,47 @@
             50% { opacity: 0.6; transform: scale(1.4); }
         }
 
-        /* Static Logo Section */
+        /* Preview Image Section */
         .hero-logo-section {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100%;
+            gap: 24px;
         }
 
-        .hero-logo-static {
+        .hero-preview-wrapper {
+            position: relative;
             width: 100%;
-            max-width: 400px;
+            max-width: 320px;
+        }
+
+        .hero-preview-image {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-xl);
+            box-shadow: 0 25px 80px rgba(109, 40, 217, 0.35);
+        }
+
+        .hero-logo-overlay {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 8px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .hero-logo-static img {
+        .hero-logo-small {
             width: 100%;
-            height: auto;
+            height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 20px 60px rgba(109, 40, 217, 0.4));
         }
 
         /* Animated Logo Section (deprecated - keeping for compatibility) */
@@ -1388,7 +1386,18 @@
             }
 
             .hero-logo-section {
-                display: none;
+                display: flex;
+            }
+
+            .hero-preview-wrapper {
+                max-width: 280px;
+            }
+
+            .hero-logo-overlay {
+                width: 60px;
+                height: 60px;
+                bottom: -15px;
+                right: -15px;
             }
 
             .demo-container {
@@ -1447,9 +1456,15 @@
                 padding: 120px 24px 80px;
             }
 
-            .hero-logo-static {
-                width: 200px;
-                height: 200px;
+            .hero-preview-wrapper {
+                max-width: 260px;
+            }
+
+            .hero-logo-overlay {
+                width: 55px;
+                height: 55px;
+                bottom: -14px;
+                right: -14px;
             }
 
             section {
@@ -1524,12 +1539,23 @@
                 text-align: center;
             }
 
-            .hero-logo-static {
-                max-width: 280px;
+            .hero-preview-wrapper {
+                max-width: 240px;
+            }
+
+            .hero-logo-overlay {
+                width: 50px;
+                height: 50px;
+                bottom: -12px;
+                right: -12px;
             }
 
             .nav-logo-tagline {
                 display: none;
+            }
+
+            .nav-logo-content {
+                gap: 6px;
             }
         }
 
@@ -1594,10 +1620,6 @@
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1>
-                    <span class="gradient-text">SW Consultant</span>
-                    <span class="subtitle">Ваш персональный помощник</span>
-                </h1>
                 <p class="hero-description">
                     Умный ИИ-ассистент для работы с продуктами Siberian Wellness. Подбор программ, анализ данных и персональные рекомендации в одном боте. Получите профессиональную поддержку 24/7 в удобном мессенджере.
                 </p>
@@ -1656,15 +1678,18 @@
                         </svg>
                         Смотреть демо
                     </a>
-                    <div class="hero-badge">
-                        <span class="hero-badge-dot"></span>
-                        ИИ-консультант нового поколения
-                    </div>
                 </div>
             </div>
             <div class="hero-logo-section">
-                <div class="hero-logo-static">
-                    <img src="logo.png" alt="SW Consultant Logo">
+                <div class="hero-preview-wrapper">
+                    <img src="sw_consultant_preview.png" alt="SW Consultant Preview" class="hero-preview-image">
+                    <div class="hero-logo-overlay">
+                        <img src="logo.png" alt="SW Consultant Logo" class="hero-logo-small">
+                    </div>
+                </div>
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    ИИ-консультант нового поколения
                 </div>
             </div>
         </div>
