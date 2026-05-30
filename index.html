@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mailru-domain" content="SpGI9DcXgazNCnSm" />
     <title>SW Consultant - ИИ-консультант для Siberian Wellness</title>
-    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
     <link rel="shortcut icon" type="image/png" href="logo.png">
-    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -28,6 +29,16 @@
             --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
             --glass-shadow-hover: 0 16px 48px rgba(109, 40, 217, 0.25);
             --text-dark: #111827;
+            --text-gray: #4B5563;
+            --text-light: #9CA3AF;
+            --white: #FFFFFF;
+            --bg-dark: #0F172A;
+            --radius-sm: 12px;
+            --radius-md: 18px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-full: 9999px;
+        }
             --text-gray: #4B5563;
             --text-light: #9CA3AF;
             --white: #FFFFFF;
@@ -2252,6 +2263,56 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="section-header reveal">
+            <span class="section-label">FAQ</span>
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            <p class="section-description">Ответы на популярные вопросы о нашем сервисе</p>
+        </div>
+        <div class="features-grid" style="max-width: 800px;">
+            <div class="glass-card reveal">
+                <h3 style="margin-bottom: 12px; color: var(--text-dark);">Как начать работу с ботом?</h3>
+                <p style="color: var(--text-gray);">Перейдите по ссылке в Telegram и отправьте любой вопрос. Бот мгновенно ответит с рекомендациями.</p>
+            </div>
+            <div class="glass-card reveal">
+                <h3 style="margin-bottom: 12px; color: var(--text-dark);">Какие задачи решает бот?</h3>
+                <p style="color: var(--text-gray);">Подбор продуктов Siberian Wellness, создание программ здоровья, анализ медицинских данных и ответы на вопросы о здоровье.</p>
+            </div>
+            <div class="glass-card reveal">
+                <h3 style="margin-bottom: 12px; color: var(--text-dark);">Нужна ли регистрация?</h3>
+                <p style="color: var(--text-gray);">Нет, просто откройте Telegram-бот и начинайте пользоваться. Регистрация нужна только для продления подписки.</p>
+            </div>
+            <div class="glass-card reveal">
+                <h3 style="margin-bottom: 12px; color: var(--text-dark);">Можно ли анализировать PDF?</h3>
+                <p style="color: var(--text-gray);">Да, загрузите файл с анализами в формате PDF или JPG, и бот даст расшифровку результатов.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" style="background: linear-gradient(180deg, transparent 0%, rgba(109, 40, 217, 0.02) 100%);">
+        <div class="section-header reveal">
+            <span class="section-label">Отзывы</span>
+            <h2 class="section-title">Что говорят пользователи</h2>
+            <p class="section-description">Реальные отзывы наших клиентов и партнёров</p>
+        </div>
+        <div class="features-grid" style="max-width: 1000px;">
+            <div class="glass-card reveal">
+                <p style="font-style: italic; margin-bottom: 16px; color: var(--text-dark);">"Бот помог подобрать комплекс для восстановления после тренировок. Результат превзошёл ожидания!"</p>
+                <p style="font-weight: 600; color: var(--primary-purple);">— Александр, партнёр SW</p>
+            </div>
+            <div class="glass-card reveal">
+                <p style="font-style: italic; margin-bottom: 16px; color: var(--text-dark);">"Анализы разобрал за 2 минуты. Теперь знаю, какие продукты нужны для моего организма."</p>
+                <p style="font-weight: 600; color: var(--primary-purple);">— Марина, клиент</p>
+            </div>
+            <div class="glass-card reveal">
+                <p style="font-style: italic; margin-bottom: 16px; color: var(--text-dark);">"Помог создать контент для продвижения в соцсетях. Конверсия выросла на 30%!"</p>
+                <p style="font-weight: 600; color: var(--primary-purple);">— Дмитрий, бизнес-партнёр</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Demo Section -->
     <section id="demo">
         <div class="demo-container">
@@ -2358,11 +2419,11 @@
                 <div class="contact-card reveal">
                     <div class="contact-icon">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.505a1 1 0 01-.553 1.236l-2.257 1.135a11.042 11.042 0 006.415 6.415l1.135-2.257a1 1 0 011.235-.552l4.505 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                         </svg>
                     </div>
-                    <h4>Время работы</h4>
-                    <p>Круглосуточно, 24/7</p>
+                    <h4>Телефон</h4>
+                    <a href="tel:+77712624034">+7 (771) 262-40-34</a>
                 </div>
             </div>
             <div class="social-links" style="margin-top: 48px;">
@@ -2387,7 +2448,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2024 SW Consultant. Все права защищены. | ИИ-консультант для Siberian Wellness</p>
+        <p>© 2026 SW Consultant. Все права защищены. | ИИ-консультант для Siberian Wellness</p>
     </footer>
 
     <script>
